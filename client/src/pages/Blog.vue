@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       blogListType: 'list',
       blogsData: this.FakeUtils.blogsData

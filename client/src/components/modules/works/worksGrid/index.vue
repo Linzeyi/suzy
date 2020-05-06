@@ -1,10 +1,20 @@
 <template>
   <div id="works_grid" class="works-grid-wrap">
     <div class="row">
-      <div class="col" v-for="colIndex in getCol ? getCol : 1" :key="colIndex" :style="{'width': (100 / getCol) + '%'}">
-        <div class="grid-item card full-card" v-for="(item, index) in worksData" :key="index" :class="{'hidden': (index % getCol) != (colIndex - 1)}">
+      <div
+        class="col"
+        v-for="colIndex in getCol ? getCol : 1"
+        :key="colIndex"
+        :style="{'width': (100 / getCol) + '%'}"
+      >
+        <div
+          class="grid-item card full-card"
+          v-for="(item, index) in worksData"
+          :key="index"
+          :class="{'hidden': (index % getCol) != (colIndex - 1)}"
+        >
           <div class="img-box">
-            <img :src="item.imgs[0].src" alt="">
+            <img :src="item.imgs[0].src" alt />
           </div>
           <div class="info-mask">
             <p class="title">{{item.title}}</p>
@@ -26,29 +36,29 @@ export default {
       }
     }
   },
-  data () {
+  data() {
     return {
       gridWidth: 300
     }
   },
-  mounted () {
+  mounted() {
     this.setGridWidth()
   },
   watch: {
-    screenWidth () {
+    screenWidth() {
       this.setGridWidth()
     }
   },
   computed: {
-    screenWidth () {
+    screenWidth() {
       return this.$store.getters['window/screenWidth']
     },
-    getCol () {
+    getCol() {
       return Math.floor(this.gridWidth / 125)
     }
   },
   methods: {
-    setGridWidth () {
+    setGridWidth() {
       this.$nextTick(() => {
         this.gridWidth = document.getElementById('works_grid').offsetWidth
       })
@@ -84,7 +94,7 @@ export default {
         }
       }
       .info-mask {
-        transition: .3s;
+        transition: 0.3s;
         position: absolute;
         top: 0;
         bottom: 0;
@@ -97,7 +107,7 @@ export default {
         justify-content: center;
         background: rgba(54, 54, 54, 0.8);
         p {
-          font-size: .8em;
+          font-size: 0.8em;
           color: #fff;
         }
         .num {

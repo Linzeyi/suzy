@@ -15,7 +15,6 @@ export default {
   MainNav: () => import('./components/common/nav/MainNav'),
   /* --------------------[END]-------------------- */
 
-
   /* ------------------[模块组件]------------------ */
   //首页模块
   MainBlogBoard: () => import('./components/modules/main/mainBlogBoard'),

@@ -1,9 +1,7 @@
 <template>
-    <div></div>
+  <div id="login"></div>
 </template>
 
 <script>
-export default {
-    
-}
+export default {}
 </script>

@@ -11,7 +11,7 @@ export default {
   install(Vue) {
     Vue.prototype.MathUtils = MathUtils
     Vue.prototype.JudgeUtils = JudgeUtils
-    Vue.prototype.TimeUtils = TimeUtils,
+    Vue.prototype.TimeUtils = TimeUtils
     Vue.prototype.FakeUtils = FakeUtils
   }
 }

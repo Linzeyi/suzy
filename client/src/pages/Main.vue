@@ -20,7 +20,7 @@
 <script>
 export default {
   name: 'Main',
-  data () {
+  data() {
     return {
       blogListType: 'list',
       cardArr: this.FakeUtils.cardArr,
@@ -44,10 +44,10 @@ export default {
     }
   }
   > .row {
-   align-items: flex-start;
-   > [class^="col-"] {
-    //  padding-left: 40px;
-   }
+    align-items: flex-start;
+    > [class^='col-'] {
+      //  padding-left: 40px;
+    }
   }
 }
 </style>

@@ -1,11 +1,21 @@
 <template>
   <div id="blog_grid" class="blog-grid-wrap">
-    <div class="row ">
-      <div class="col" v-for="colIndex in getCol ? getCol : 1" :key="colIndex" :style="{'width': (100 / getCol) + '%'}">
-        <div class="blog-item" v-for="(item, index) in blogsData" :key="index" :class="{'hidden': (index % getCol) != (colIndex - 1)}">
+    <div class="row">
+      <div
+        class="col"
+        v-for="colIndex in getCol ? getCol : 1"
+        :key="colIndex"
+        :style="{'width': (100 / getCol) + '%'}"
+      >
+        <div
+          class="blog-item"
+          v-for="(item, index) in blogsData"
+          :key="index"
+          :class="{'hidden': (index % getCol) != (colIndex - 1)}"
+        >
           <div class="blog card full-card">
             <div class="img-box">
-              <img class="cover-img" :src="item.coverImg" alt="博客封面">
+              <img class="cover-img" :src="item.coverImg" alt="博客封面" />
             </div>
             <div class="info-box">
               <p class="title">{{item.title}}</p>
@@ -44,44 +54,46 @@ export default {
       }
     }
   },
-  data () {
+  data() {
     return {
       gridWidth: 1024
     }
   },
-  mounted () {
+  mounted() {
     this.setGridWidth()
     this.setImgSize()
   },
   watch: {
     blogsData: {
-      handler: function () {
+      handler: function() {
         this.$nextTick(() => {
           this.setImgSize()
         })
       },
       deep: true
     },
-    screenWidth () {
+    screenWidth() {
       this.setGridWidth()
       this.setImgSize()
     }
   },
   computed: {
-    screenWidth () {
+    screenWidth() {
       return this.$store.getters['window/screenWidth']
     },
-    getCol () {
+    getCol() {
       return Math.floor(this.gridWidth / 240)
     }
   },
   methods: {
-    setGridWidth () {
+    setGridWidth() {
       this.$nextTick(() => {
-        this.gridWidth = document.getElementById('blog_grid') ? document.getElementById('blog_grid').offsetWidth : 0
+        this.gridWidth = document.getElementById('blog_grid')
+          ? document.getElementById('blog_grid').offsetWidth
+          : 0
       })
     },
-    setImgSize () {
+    setImgSize() {
       setTimeout(() => {
         let blogCardGroupDom = document.getElementById('blog_grid')
         if (blogCardGroupDom) {
@@ -118,7 +130,7 @@ export default {
   }
   .blog-item {
     $timeline-width: 100px;
-    transition: .3s;
+    transition: 0.3s;
     .row {
       align-items: stretch;
     }
@@ -147,7 +159,7 @@ export default {
           }
         }
         .author {
-          font-size: .8em;
+          font-size: 0.8em;
           margin-bottom: 5px;
         }
         .desc {
@@ -163,13 +175,13 @@ export default {
           border-top: 1px solid rgb(232, 234, 238);
           .create-time {
             flex-grow: 1;
-            font-size: .8em;
-            opacity: .8;
+            font-size: 0.8em;
+            opacity: 0.8;
           }
           .icon-item {
             padding-left: 10px;
-            font-size: .8em;
-            opacity: .8;
+            font-size: 0.8em;
+            opacity: 0.8;
             .iconfont {
               font-size: 1em;
             }

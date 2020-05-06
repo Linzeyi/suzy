@@ -1,7 +1,7 @@
 <!-- loading加载组件 -->
 <template>
   <div class="loading-cover" v-if="isLoading">
-    <img class="loading-svg" src="../../../../public/svg/loading3.svg" alt="">
+    <img class="loading-svg" src="../../../../public/svg/loading3.svg" alt />
   </div>
 </template>
 

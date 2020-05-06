@@ -1,4 +1,3 @@
-import Default from '../views/Default.vue'
 import Main from '../pages/Main.vue'
 import Blog from '../pages/Blog.vue'
 
@@ -9,13 +8,13 @@ const routes = [
   {
     path: '/',
     name: 'default',
-    component: Default,
+    component: () => import('@/views/Default.vue'),
     redirect: 'main',
     children: [
       {
         name: 'main',
         path: '/main',
-        component: Main,
+        component: Main
       },
       {
         name: 'blog',
@@ -26,7 +25,7 @@ const routes = [
   },
   {
     path: '*',
-    component: Default,
+    component: () => import('@/views/Default.vue'),
     redirect: 'main'
   }
 ]

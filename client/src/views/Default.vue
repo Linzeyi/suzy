@@ -22,7 +22,7 @@ export default {
   right: 0;
   overflow: auto;
   &::before {
-    content: "";
+    content: '';
     position: fixed;
     top: 0;
     right: 0;

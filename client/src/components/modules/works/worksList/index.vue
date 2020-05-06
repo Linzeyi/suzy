@@ -23,13 +23,17 @@
       <div class="loading-box row" v-if="loadingMore">
         <loadingCover :isLoading="loadingMore" />
       </div>
-      <p class="row bg-line" v-if="!loadingMore && pageInfo.pageSize * pageInfo.pageNum <= worksData.length">
+      <p
+        class="row bg-line"
+        v-if="!loadingMore && pageInfo.pageSize * pageInfo.pageNum <= worksData.length"
+      >
         <button class="btn-more" @click="getMore()">显示更多</button>
       </p>
-      <p class="row bg-line" v-if="!loadingMore && pageInfo.pageSize * pageInfo.pageNum > worksData.length">
-        <button class="btn-more no-more">
-          没有更多啦
-        </button>
+      <p
+        class="row bg-line"
+        v-if="!loadingMore && pageInfo.pageSize * pageInfo.pageNum > worksData.length"
+      >
+        <button class="btn-more no-more">没有更多啦</button>
       </p>
     </div>
   </div>
@@ -45,7 +49,7 @@ export default {
       }
     }
   },
-  data () {
+  data() {
     return {
       loadingMore: false,
       pageInfo: {
@@ -64,18 +68,17 @@ export default {
     }
   },
   computed: {
-    computedWorksData () {
-      return this.worksData
-        .slice(
-          this.pageInfo.pageNum - 1,
-          ((this.pageInfo.pageSize * this.pageInfo.pageNum) < this.worksData.length)
-            ? this.pageInfo.pageSize * this.pageInfo.pageNum - 1
-            : this.worksData.length
-        )
+    computedWorksData() {
+      return this.worksData.slice(
+        this.pageInfo.pageNum - 1,
+        this.pageInfo.pageSize * this.pageInfo.pageNum < this.worksData.length
+          ? this.pageInfo.pageSize * this.pageInfo.pageNum - 1
+          : this.worksData.length
+      )
     }
   },
   methods: {
-    getMore () {
+    getMore() {
       this.loadingMore = true
       setTimeout(() => {
         this.loadingMore = false
@@ -92,7 +95,7 @@ export default {
   .works-box {
     width: 100%;
     margin-bottom: 10px;
-    transition: .3s;
+    transition: 0.3s;
     .works-card {
       position: relative;
       width: 100%;
@@ -116,18 +119,18 @@ export default {
     }
     .info-box {
       padding: 0;
-      transition: .3s;
+      transition: 0.3s;
       overflow: hidden;
       box-sizing: content-box;
       border-bottom: 1px solid transparent;
       > p {
-        transition: .3s;
+        transition: 0.3s;
         opacity: 0;
         height: 0;
         line-height: 25px;
         align-items: stretch;
         overflow: hidden;
-        text-overflow:ellipsis;
+        text-overflow: ellipsis;
         white-space: nowrap;
         .icon-box {
           position: relative;
@@ -159,8 +162,8 @@ export default {
         }
       }
       .desc {
-        font-size: .8em;
-        opacity: .8;
+        font-size: 0.8em;
+        opacity: 0.8;
       }
     }
   }
@@ -170,7 +173,8 @@ export default {
     .row {
       justify-content: center;
       &.bg-line {
-        &::before, &::after {
+        &::before,
+        &::after {
           content: '';
           position: absolute;
           height: 1px;
@@ -196,12 +200,12 @@ export default {
     }
     .no-more {
       z-index: 5;
-      font-size: .8em;
+      font-size: 0.8em;
       color: #fff;
       padding: 5px 15px;
       border-radius: 20px;
       display: inline-block;
-      background: #acabab
+      background: #acabab;
     }
   }
 }

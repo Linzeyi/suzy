@@ -11,7 +11,7 @@
             <p class="create-time">
               <i class="iconfont icon-time">&#xf3ce;</i>
               {{TimeUtils.DateFormat(item.createTime)}}
-              </p>
+            </p>
             <div class="line-box bottom-line-box">
               <div class="dot"></div>
               <div class="line"></div>
@@ -20,7 +20,7 @@
           <div class="blog card full-card">
             <div class="row">
               <div class="img-box">
-                <img class="cover-img" :src="item.coverImg" alt="博客封面">
+                <img class="cover-img" :src="item.coverImg" alt="博客封面" />
               </div>
               <div class="info-box">
                 <p class="title">{{item.title}}</p>
@@ -67,27 +67,27 @@ export default {
   },
   watch: {
     blogsData: {
-      handler: function () {
+      handler: function() {
         this.$nextTick(() => {
           this.setImgSize()
         })
       },
       deep: true
     },
-    screenWidth () {
+    screenWidth() {
       this.setImgSize()
     }
   },
   computed: {
-    screenWidth () {
+    screenWidth() {
       return this.$store.getters['window/screenWidth']
     }
   },
-  mounted () {
+  mounted() {
     this.setImgSize()
   },
   methods: {
-    setImgSize () {
+    setImgSize() {
       setTimeout(() => {
         let blogListDom = document.getElementById('blog_list')
         if (blogListDom) {
@@ -103,15 +103,14 @@ export default {
               let minH = infoDomArr[index].offsetHeight
               if (200 * ratio < minH) {
                 item.style.height = minH + 'px'
-                item.style.width = (minH / ratio) +'px'
-              }
-              else {
+                item.style.width = minH / ratio + 'px'
+              } else {
                 item.style.height = 200 * ratio + 'px'
                 item.style.width = 200 + 'px'
               }
               if (item.offsetHeight > minH) {
                 infoDomArr[index].style.height = item.style.height
-              } 
+              }
             }
           })
         }
@@ -128,14 +127,15 @@ $line-color: #6f7c8a;
   .blog-list {
     .blog-item {
       $timeline-width: 100px;
-      transition: .3s;
+      transition: 0.3s;
       > .row {
         align-items: stretch;
       }
       &:first-child {
         .timeline {
           .line-box.top-line-box {
-            .dot, .line {
+            .dot,
+            .line {
               background: transparent;
             }
           }
@@ -146,7 +146,11 @@ $line-color: #6f7c8a;
           .line-box.bottom-line-box {
             .line {
               background: transparent;
-              background-image: linear-gradient(to bottom, $line-color, transparent);
+              background-image: linear-gradient(
+                to bottom,
+                $line-color,
+                transparent
+              );
             }
           }
         }
@@ -169,7 +173,11 @@ $line-color: #6f7c8a;
               height: 5px;
             }
             .line {
-              background-image: linear-gradient(to bottom, #2d3946, $line-color);
+              background-image: linear-gradient(
+                to bottom,
+                #2d3946,
+                $line-color
+              );
             }
           }
         }
@@ -185,7 +193,7 @@ $line-color: #6f7c8a;
           align-items: center;
           height: $font-height;
           padding-left: 20px;
-          font-size: .8em;
+          font-size: 0.8em;
           user-select: none;
           .icon-time {
             font-size: 1em;
@@ -220,7 +228,7 @@ $line-color: #6f7c8a;
             height: $dot-size;
             border-radius: 50%;
             background: $line-color;
-            transition: .3s;
+            transition: 0.3s;
           }
         }
       }
@@ -255,7 +263,7 @@ $line-color: #6f7c8a;
             }
           }
           .author {
-            font-size: .8em;
+            font-size: 0.8em;
             margin-bottom: 5px;
           }
           .desc {
@@ -271,13 +279,13 @@ $line-color: #6f7c8a;
             border-top: 1px solid rgb(232, 234, 238);
             .create-time {
               flex-grow: 1;
-              font-size: .8em;
-              opacity: .8;
+              font-size: 0.8em;
+              opacity: 0.8;
             }
             .icon-item {
               padding-left: 10px;
-              font-size: .8em;
-              opacity: .8;
+              font-size: 0.8em;
+              opacity: 0.8;
               .iconfont {
                 font-size: 1em;
               }

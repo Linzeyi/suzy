@@ -6,12 +6,13 @@
       <div class="row">
         <div class="left-box">
           <ul class="menu-list left-list">
-            <li 
-            class="menu-item" 
-            v-for="(item, index) in navBarArr" 
-            :key="index" 
-            :class="{'on': item.title == currentPage.title}"
-            @click="selectedPage(item)">
+            <li
+              class="menu-item"
+              v-for="(item, index) in navBarArr"
+              :key="index"
+              :class="{'on': item.title == currentPage.title}"
+              @click="selectedPage(item)"
+            >
               <span class="menu-title">{{item.title}}</span>
             </li>
           </ul>
@@ -22,7 +23,12 @@
         <div class="right-box">
           <ul class="menu-list right-list">
             <li class="menu-item search-item circle-item">
-              <input :class="{'on': searchVal}" type="text" placeholder="输入关键词搜索" v-model="searchVal">
+              <input
+                :class="{'on': searchVal}"
+                type="text"
+                placeholder="输入关键词搜索"
+                v-model="searchVal"
+              />
               <i class="iconfont icon-search">&#xf3cb;</i>
             </li>
           </ul>
@@ -36,7 +42,7 @@
 <script>
 export default {
   name: 'mainNav',
-  data () {
+  data() {
     return {
       searchVal: '',
       showPieHover: false,
@@ -82,7 +88,7 @@ export default {
       currentPage: ''
     }
   },
-  mounted () {
+  mounted() {
     this.navBarArr.forEach(element => {
       if (element.path == this.$route.path) {
         this.currentPage = element
@@ -90,16 +96,16 @@ export default {
     })
   },
   computed: {
-    getColumnItemNum () {
+    getColumnItemNum() {
       return parseInt(this.screenWidth / 8)
     },
-    screenWidth () {
+    screenWidth() {
       return this.$store.getters['window/screenWidth']
     }
   },
   watch: {
     currentPage: {
-      handler () {
+      handler() {
         let newPos = []
         // this.lineLogoBadgeOption.pos
       },
@@ -107,7 +113,7 @@ export default {
     }
   },
   methods: {
-    selectedPage (page) {
+    selectedPage(page) {
       this.currentPage = page
       this.$router.push({
         path: this.currentPage.path
@@ -142,12 +148,16 @@ export default {
       left: 0;
       right: 0;
       position: absolute;
-      background-image: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+      background-image: radial-gradient(
+        ellipse at bottom,
+        #1b2735 0%,
+        #090a0f 100%
+      );
       background-size: cover;
       background-position: center;
     }
     .menu-list {
-      $menu-color: rgba(255, 255, 255, .8);
+      $menu-color: rgba(255, 255, 255, 0.8);
       $menu-hover-color: rgba(255, 255, 255, 1);
       display: flex;
       align-items: center;
@@ -172,7 +182,7 @@ export default {
         cursor: pointer;
         .menu-title {
           color: $menu-color;
-          transition: .4s;
+          transition: 0.4s;
           padding-bottom: 10px;
           user-select: none;
         }
@@ -188,7 +198,7 @@ export default {
           line-height: $menu-height;
           padding-left: 0;
           width: 0;
-          transition: .4s;
+          transition: 0.4s;
           opacity: 0;
           &:focus,
           &.on {
@@ -208,9 +218,10 @@ export default {
           font-size: 1.3em;
           cursor: pointer;
           user-select: none;
-          transition: .4s;
+          transition: 0.4s;
         }
-        &:hover, &.on {
+        &:hover,
+        &.on {
           border-color: $menu-hover-color;
           input {
             color: $menu-hover-color;
@@ -234,7 +245,8 @@ export default {
       z-index: 4;
       width: 100%;
       height: $main-nav-height;
-      .left-box, .right-box{
+      .left-box,
+      .right-box {
         width: 35%;
         flex-grow: 1;
       }
@@ -243,13 +255,14 @@ export default {
         text-align: center;
         .title {
           font-size: 2.7em;
-          color: #FFF;
+          color: #fff;
           text-align: center;
-          font-family: 'lato',sans-serif;
+          font-family: 'lato', sans-serif;
           font-weight: 300;
           letter-spacing: 10px;
           user-select: none;
           background: -webkit-linear-gradient(white, #38495a);
+          background-clip: text;
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
         }

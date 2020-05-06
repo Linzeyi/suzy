@@ -1,23 +1,25 @@
 <template>
   <div class="badge-logo-box" :style="{'z-index': zIndex}">
-    <div 
-    class="center-box"
-    :style="{
+    <div
+      class="center-box"
+      :style="{
       'height': size + 'px',
       'width': size + 'px',
       'left': pos + '%',
       'margin-left': (-size / 2) + 'px',
       'border-radius': borderRadius + 'px'
-    }">
+    }"
+    >
       <div
-      class="inner-box"
-      :style="{
+        class="inner-box"
+        :style="{
         'height': (size - innerPos * 2) + 'px',
         'width': (size - innerPos * 2) + 'px',
         'top': innerPos + 'px',
         'left': innerPos + 'px',
         'border-radius': borderRadius + 'px'
-      }"></div>
+      }"
+      ></div>
     </div>
   </div>
 </template>
@@ -74,11 +76,22 @@ export default {
     box-shadow: 0 0 7px 2px rgba(0, 0, 0, 0.5);
     background-color: #fff;
     transition: 1.4s;
-    background-image: linear-gradient(to bottom right, #fff, #fff ,#fff, #fff ,#f1f1f1 ,#dbdbdb, #bdbdbd, #adadad, #8a8a8a, #4b4b4b);
+    background-image: linear-gradient(
+      to bottom right,
+      #fff,
+      #fff,
+      #fff,
+      #fff,
+      #f1f1f1,
+      #dbdbdb,
+      #bdbdbd,
+      #adadad,
+      #8a8a8a,
+      #4b4b4b
+    );
     // background-image: linear-gradient(to bottom right, #fff, #fff ,#fff, #fff ,#fff ,#fff, #e0e0e0, #cfcfcf, #a0a0a0, #868686);
     &:hover {
-      box-shadow: 0 0 20px 2px rgba(0, 0, 0, .6);
-      
+      box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.6);
     }
     .inner-box {
       position: relative;

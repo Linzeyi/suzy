@@ -1,62 +1,67 @@
 <template>
-  <div 
-  id="pie_hover"
-  :class="{'hover': hoverSlicesIndex != -1}"
-  :style="{
-    'height': diameter + 'px',
-    'width': diameter + 'px',
-    'margin-left': '-' + radius + 'px',
-    'margin-top': '-' + radius + 'px',
-    'opacity': showPieHover ? 1 : 0,
-    'transition': showPieHover ? '.3s' : '.5s'
-  }">
-    <!-- 扇形碎片 -->
-    <div 
-    class="pie-mask"
-    v-for="(item, index) in slicesArr"
-    :key="index"
-    :class="{'on': index == hoverSlicesIndex}"
+  <div
+    id="pie_hover"
+    :class="{ hover: hoverSlicesIndex != -1 }"
     :style="{
-      'height': getMaskDiameter(index) + 'px',
-      'width': getMaskDiameter(index) + 'px',
-      'margin-left': '-' + getMaskRadius(index) + 'px',
-      'margin-top': '-' + getMaskRadius(index) + 'px',
-      'opacity': showPieHover ? 1 : 0,
-      'transition-delay': showPieHover ? '0s' : '.4s'
-    }">
-      <div
-      class="slices" 
+      height: diameter + 'px',
+      width: diameter + 'px',
+      'margin-left': '-' + radius + 'px',
+      'margin-top': '-' + radius + 'px',
+      opacity: showPieHover ? 1 : 0,
+      transition: showPieHover ? '.3s' : '.5s'
+    }"
+  >
+    <!-- 扇形碎片 -->
+    <div
+      class="pie-mask"
+      v-for="(item, index) in slicesArr"
+      :key="index"
+      :class="{ on: index == hoverSlicesIndex }"
       :style="{
-        'height': getMaskDiameter(index) + 'px',
-        'width': getMaskDiameter(index) + 'px',
-        'transform': getSlicesTransformStyle(index),
-        'transition': index == hoverSlicesIndex ? '.4s 0s' : '.4s .1s'
-      }">
+        height: getMaskDiameter(index) + 'px',
+        width: getMaskDiameter(index) + 'px',
+        'margin-left': '-' + getMaskRadius(index) + 'px',
+        'margin-top': '-' + getMaskRadius(index) + 'px',
+        opacity: showPieHover ? 1 : 0,
+        'transition-delay': showPieHover ? '0s' : '.4s'
+      }"
+    >
+      <div
+        class="slices"
+        :style="{
+          height: getMaskDiameter(index) + 'px',
+          width: getMaskDiameter(index) + 'px',
+          transform: getSlicesTransformStyle(index),
+          transition: index == hoverSlicesIndex ? '.4s 0s' : '.4s .1s'
+        }"
+      >
         <!-- <span class="line"></span> -->
       </div>
     </div>
     <!-- 鼠标浮动遮罩 -->
     <div
-    class="hover-mask" 
-    :style="{
-      'height': diameter + 'px',
-      'width': diameter + 'px',
-      'margin-left': '-' + radius + 'px',
-      'margin-top': '-' + radius + 'px',
-    }">
-      <div
-      class="hover-slices" 
-      v-for="(item, index) in slicesArr"
-      :key="index"
-      :class="{'on': index == hoverSlicesIndex}"
+      class="hover-mask"
       :style="{
-        'height': getMaskDiameter(index) + 'px',
-        'width': getMaskDiameter(index) + 'px',
-        'transform': getHoverSlicesTransformStyle(index),
-        'opacity': showPieHover ? 1 : 0
+        height: diameter + 'px',
+        width: diameter + 'px',
+        'margin-left': '-' + radius + 'px',
+        'margin-top': '-' + radius + 'px'
       }"
-      @mouseenter="hoverSlices(index)"
-      @mouseleave="leaveSlices()">
+    >
+      <div
+        class="hover-slices"
+        v-for="(item, index) in slicesArr"
+        :key="index"
+        :class="{ on: index == hoverSlicesIndex }"
+        :style="{
+          height: getMaskDiameter(index) + 'px',
+          width: getMaskDiameter(index) + 'px',
+          transform: getHoverSlicesTransformStyle(index),
+          opacity: showPieHover ? 1 : 0
+        }"
+        @mouseenter="hoverSlices(index)"
+        @mouseleave="leaveSlices()"
+      >
         <!-- <p 
         class="slice-info"
         :style="{
@@ -69,7 +74,7 @@
         }">
           <span class="desc" :style="{'font-size': '0.7em'}">{{item.desc}}</span>
           <span class="title">{{item.title}}</span>
-        </p> -->
+        </p>-->
       </div>
     </div>
   </div>
@@ -98,79 +103,96 @@ export default {
       }
     }
   },
-  data () {
+  data() {
     return {
       hoverSlicesIndex: -1,
       pieMaskRadiusArr: [],
       randomSkewArr: []
     }
   },
-  mounted () {
+  mounted() {
     this.setMaskRadius()
   },
   watch: {
-    showPieHover (val) {
+    showPieHover(val) {
       if (val) {
         this.setMaskRadius()
       }
     }
   },
   computed: {
-    getTitleSize () {
+    getTitleSize() {
       let scale = 15
       return Math.floor(this.radius / scale) + 1 + 'px'
     },
-    diameter () {
+    diameter() {
       return this.radius * 2
     },
-    getMaskRadius () {
-      return function (index) {
-        return this.pieMaskRadiusArr.length ? this.pieMaskRadiusArr[index] : this.radius
+    getMaskRadius() {
+      return function(index) {
+        return this.pieMaskRadiusArr.length
+          ? this.pieMaskRadiusArr[index]
+          : this.radius
       }
     },
-    getMaskDiameter () {
-      return function (index) {
+    getMaskDiameter() {
+      return function(index) {
         return this.getMaskRadius(index) * 2
       }
     },
-    getSlicesTransformStyle () {
-      return function (index) {
-        let transformStyle = 'rotate(' + this.getSlicesRotate(index) + 'deg) skewY(' + this.randomSkewArr[index] + 'deg)'
+    getSlicesTransformStyle() {
+      return function(index) {
+        let transformStyle =
+          'rotate(' +
+          this.getSlicesRotate(index) +
+          'deg) skewY(' +
+          this.randomSkewArr[index] +
+          'deg)'
         return transformStyle
       }
     },
-    getHoverSlicesTransformStyle () {
-      return function (index) {
-        let transformStyle = 'rotate(' + this.getSlicesRotate(index) + 'deg) skewY(' + this.randomSkewArr[index] + 'deg)'
+    getHoverSlicesTransformStyle() {
+      return function(index) {
+        let transformStyle =
+          'rotate(' +
+          this.getSlicesRotate(index) +
+          'deg) skewY(' +
+          this.randomSkewArr[index] +
+          'deg)'
         return transformStyle
       }
     },
-    getSlicesTitleTransformStyle () {
-      return function (index) {
-        let transformStyle = 'skewY(' + -this.randomSkewArr[index] + 'deg)rotate(' + (360 - this.getSlicesRotate(index)) + 'deg)'
+    getSlicesTitleTransformStyle() {
+      return function(index) {
+        let transformStyle =
+          'skewY(' +
+          -this.randomSkewArr[index] +
+          'deg)rotate(' +
+          (360 - this.getSlicesRotate(index)) +
+          'deg)'
         return transformStyle
       }
     },
-    getSlicesRotate () {
-      return function (index) {
+    getSlicesRotate() {
+      return function(index) {
         let count = this.pieMaskRadiusArr.length
         let perAngle = 360 / count
-        return this.showPieHover ? (perAngle * index) + 180 : 180
+        return this.showPieHover ? perAngle * index + 180 : 180
       }
     },
-    getSlicesSkew () {
+    getSlicesSkew() {
       let count = this.slicesArr.length
-      return 90 - (360 / count)
+      return 90 - 360 / count
     }
   },
   methods: {
-    hoverSlices (index) {
+    hoverSlices(index) {
       this.hoverSlicesIndex = index
     },
-    leaveSlices () {
+    leaveSlices() {
       this.hoverSlicesIndex = -1
     },
-    setMaskRadius () {
+    setMaskRadius() {
       this.$nextTick(() => {
         this.pieMaskRadiusArr = []
         this.randomSkewArr = []
@@ -182,7 +204,7 @@ export default {
           this.randomSkewArr.push(skew)
         }
       })
-    },
+    }
   }
 }
 </script>
@@ -204,7 +226,7 @@ export default {
     top: 50%;
     left: 50%;
     box-shadow: 0 0 60px 35px #ffffff;
-    transition: .3s .2s;
+    transition: 0.3s 0.2s;
   }
   // &::after {
   //   content: '';
@@ -220,7 +242,8 @@ export default {
   //   transition: .3s;
   //   box-shadow: 0 0 90px 140px #1f1f1f;
   // }
-  .pie-mask, .hover-mask {
+  .pie-mask,
+  .hover-mask {
     z-index: 1;
     border-radius: 50%;
     left: 50%;
@@ -239,8 +262,8 @@ export default {
         box-shadow: 0 0 15px 2px rgb(20, 20, 20);
         border-color: #fff;
         .line {
-          background-color: rgba(255, 255, 255, .6);
-        box-shadow: 0 1px 5px 0 rgb(48, 48, 48);
+          background-color: rgba(255, 255, 255, 0.6);
+          box-shadow: 0 1px 5px 0 rgb(48, 48, 48);
         }
       }
     }
@@ -255,7 +278,7 @@ export default {
       justify-content: center;
       transform: rotate(0);
       box-shadow: 0 0 4px 5px rgba(70, 70, 70, 0.3);
-      background-color: rgba(204, 204, 204, .5);
+      background-color: rgba(204, 204, 204, 0.5);
       .line {
         display: inline-block;
         position: absolute;
@@ -264,9 +287,9 @@ export default {
         height: 2px;
         width: 100%;
         transform: rotate(-3deg);
-        transition: .3s;
-        background-color: rgba(255, 255, 255, .3);
-        box-shadow: 0 1px 3px 0 rgba(66, 66, 66, .5);
+        transition: 0.3s;
+        background-color: rgba(255, 255, 255, 0.3);
+        box-shadow: 0 1px 3px 0 rgba(66, 66, 66, 0.5);
       }
     }
   }
@@ -294,13 +317,13 @@ export default {
         text-align: left;
         user-select: none;
         .desc {
-          transition: .3s .4s;
+          transition: 0.3s 0.4s;
           display: block;
           opacity: 0;
           color: #fff;
         }
         .title {
-          transition: .3s .4s;
+          transition: 0.3s 0.4s;
           position: relative;
           top: -15px;
           color: #fff;
@@ -313,13 +336,13 @@ export default {
           .desc {
             color: rgb(59, 59, 59);
             opacity: 1;
-            transition: .3s;
+            transition: 0.3s;
             font-weight: 600;
             text-shadow: 0 0 2px #ffffff;
           }
           .title {
             color: rgb(59, 59, 59);
-            transition: .3s;
+            transition: 0.3s;
             top: 0;
             text-shadow: none;
           }

@@ -7,7 +7,7 @@
       :size="lineLogoBadgeOption.size" 
       :inner-pos="lineLogoBadgeOption.innerPos" 
       :border-radius="lineLogoBadgeOption.borderRadius" 
-      :pos="item" />  -->
+    :pos="item" />-->
   </div>
 </template>
 
@@ -28,14 +28,13 @@ export default {
       }
     }
   },
-  mounted() {
-  }
+  mounted() {}
 }
 </script>
 
 <style lang="scss" scoped>
 .metal-frame {
   box-shadow: 0 1px 12px 1px rgb(14, 14, 14);
-  background: rgba($color: #fff, $alpha: .8);
+  background: rgba($color: #fff, $alpha: 0.8);
 }
 </style>

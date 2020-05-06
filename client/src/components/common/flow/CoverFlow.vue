@@ -1,9 +1,17 @@
 <!-- 封面轮播组件 -->
 <template>
   <div id="cover_flow" @mouseenter="stopTimer" @mouseleave="setTimer">
-    <div v-if="colorMaskShow" class="color-mask" :style="{'backgroundImage': gradientArr[colorIndex]}"></div>
-    <div v-if="imgMaskShow" class="img-mask" :style="{'backgroundImage': 'url(' + cardArr[current].src + ')'}"></div>
-    <bubbleBg v-if="bubbleBgShow" :bubbles='bubbleOption'></bubbleBg>
+    <div
+      v-if="colorMaskShow"
+      class="color-mask"
+      :style="{'backgroundImage': gradientArr[colorIndex]}"
+    ></div>
+    <div
+      v-if="imgMaskShow"
+      class="img-mask"
+      :style="{'backgroundImage': 'url(' + cardArr[current].src + ')'}"
+    ></div>
+    <bubbleBg v-if="bubbleBgShow" :bubbles="bubbleOption"></bubbleBg>
     <div class="cover-container">
       <div class="prev-btn" @click="prevCard()">
         <i class="iconfont icon-prev">&#xf3b5;</i>
@@ -18,18 +26,14 @@
               :class="item.class"
               :style="{'backgroundImage': 'url(' + item.src + ')'}"
               @click="selectCard(index)"
-            >
-            </div>
+            ></div>
           </div>
         </div>
         <div class="right-box">
-          <div
-            class="info"
-            v-for="(item, index) in flowCardArr"
-            :key="index"
-            :class="item.class"
-          >
-            <p class="type"><span>{{item.type}}</span></p>
+          <div class="info" v-for="(item, index) in flowCardArr" :key="index" :class="item.class">
+            <p class="type">
+              <span>{{item.type}}</span>
+            </p>
             <p class="title">{{item.title}}</p>
             <button class="btn-line btn-white">查看详情</button>
           </div>
@@ -40,10 +44,11 @@
       </div>
     </div>
     <div class="bottom-bar">
-      <div class="bar-item" 
-        v-for="(item, index) in flowCardArr" 
+      <div
+        class="bar-item"
+        v-for="(item, index) in flowCardArr"
         :key="index"
-        :class="item.class" 
+        :class="item.class"
         @click="selectCard(index)"
       ></div>
     </div>
@@ -54,19 +59,22 @@
 export default {
   name: 'coverFlow',
   props: {
-    colorMaskShow: { // 颜色滤镜
+    colorMaskShow: {
+      // 颜色滤镜
       type: Boolean,
       default: () => {
         return false
       }
     },
-    imgMaskShow: { // 图片背景滤镜
+    imgMaskShow: {
+      // 图片背景滤镜
       type: Boolean,
       default: () => {
         return false
       }
     },
-    bubbleBgShow: { // 气泡滤镜
+    bubbleBgShow: {
+      // 气泡滤镜
       type: Boolean,
       default: () => {
         return false
@@ -81,7 +89,7 @@ export default {
     startColorIndex: {
       type: Number,
       default: () => {
-       return 0 
+        return 0
       }
     },
     cardArr: {
@@ -98,15 +106,18 @@ export default {
             size: 4,
             num: 20,
             time: 8
-          }, {
+          },
+          {
             size: 12,
             num: 10,
             time: 14
-          }, {
+          },
+          {
             size: 30,
             num: 5,
             time: 25
-          }, {
+          },
+          {
             size: 50,
             num: 4,
             time: 30
@@ -115,7 +126,7 @@ export default {
       }
     }
   },
-  data () {
+  data() {
     return {
       current: 0,
       canClick: true,
@@ -131,17 +142,17 @@ export default {
       ]
     }
   },
-  mounted () {
+  mounted() {
     this.setTimer()
     this.colorIndex = this.startColorIndex
   },
   watch: {
-    current () {
+    current() {
       this.colorIndex = (this.colorIndex + 1) % this.gradientArr.length
     }
   },
   computed: {
-    flowCardArr () {
+    flowCardArr() {
       let arr = this.cardArr
       let length = arr.length
       let cur = this.current
@@ -152,64 +163,65 @@ export default {
       let future2 = length > 3 ? (cur + 2) % length : -1
       // console.log('past2: ' + past2 + '; past1: ' + past1 + '; current: ' + cur + '; future1: ' + future1 + '; future2: ' + future2)
       for (let i = 0; i < arr.length; i++) {
-        switch(i) {
+        switch (i) {
           case past2:
-            arr[i].class = "past2";
-            break;
+            arr[i].class = 'past2'
+            break
           case past1:
-            arr[i].class = "past1";
-            break;
+            arr[i].class = 'past1'
+            break
           case cur:
-            arr[i].class = "current";
-            break;
+            arr[i].class = 'current'
+            break
           case future1:
-            arr[i].class = "future1";
-            break;
+            arr[i].class = 'future1'
+            break
           case future2:
-            arr[i].class = "future2";
-            break;
+            arr[i].class = 'future2'
+            break
           default:
-            arr[i].class = "";
+            arr[i].class = ''
         }
       }
       return arr
     }
   },
   methods: {
-    stopTimer () {
+    stopTimer() {
       clearInterval(this.timer)
     },
-    setTimer () {
+    setTimer() {
       clearInterval(this.timer)
       this.timer = setInterval(() => {
         this.current = (this.current + 1) % this.cardArr.length
       }, 4000)
     },
-    selectCard (index) {
-      if(this.canClick) {
+    selectCard(index) {
+      if (this.canClick) {
         this.current = index
         this.canClick = false
         setTimeout(() => {
           this.canClick = true
-        },600)
+        }, 600)
       }
     },
-    prevCard () {
-      if(this.canClick) {
-        this.current = (this.cardArr.length + (this.current - 1)) % this.cardArr.length
+    prevCard() {
+      if (this.canClick) {
+        this.current =
+          (this.cardArr.length + (this.current - 1)) % this.cardArr.length
         this.canClick = false
-         setTimeout(() => {
+        setTimeout(() => {
           this.canClick = true
-        },600)
+        }, 600)
       }
     },
-    nextCard () {
-      if(this.canClick) {
+    nextCard() {
+      if (this.canClick) {
         this.current = (this.current + 1) % this.cardArr.length
         this.canClick = false
-         setTimeout(() => {
+        setTimeout(() => {
           this.canClick = true
-        },600)
+        }, 600)
       }
     }
   }
@@ -222,7 +234,8 @@ $gallery-height: 300px;
   position: relative;
   overflow: hidden;
   &:hover {
-    .prev-btn, .next-btn {
+    .prev-btn,
+    .next-btn {
       display: inline-block;
     }
     .prev-btn {
@@ -237,9 +250,9 @@ $gallery-height: 300px;
     bottom: 0;
     left: 0;
     right: 0;
-    opacity: .8;
+    opacity: 0.8;
     position: absolute;
-    transition: .6s ease;
+    transition: 0.6s ease;
   }
   .img-mask {
     top: -10px;
@@ -247,12 +260,12 @@ $gallery-height: 300px;
     left: -20px;
     right: -20px;
     z-index: 0;
-    opacity: .5;
+    opacity: 0.5;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     filter: grayscale(20%) brightness(30%) blur(6px);
-    transition: .6s ease;
+    transition: 0.6s ease;
     position: absolute;
   }
 }
@@ -262,7 +275,8 @@ $gallery-height: 300px;
   position: relative;
   overflow: hidden;
   z-index: 1;
-  .prev-btn, .next-btn {
+  .prev-btn,
+  .next-btn {
     z-index: 5;
     position: absolute;
     height: 80px;
@@ -273,7 +287,7 @@ $gallery-height: 300px;
     background-color: rgba(0, 0, 0, 0.3);
     border-radius: 14px;
     overflow: hidden;
-    transition: .3s ease;
+    transition: 0.3s ease;
     cursor: pointer;
     user-select: none;
     &:hover {
@@ -287,9 +301,9 @@ $gallery-height: 300px;
       font-size: 1.8em;
       line-height: 1em;
       transform-origin: center;
-      color: rgba(255, 255, 255, .6);
+      color: rgba(255, 255, 255, 0.6);
       display: inline-block;
-      transition: .6s ease;
+      transition: 0.6s ease;
     }
   }
   .prev-btn {
@@ -297,7 +311,7 @@ $gallery-height: 300px;
     .icon-prev {
       left: 21px;
       top: -16px;
-      transform: rotate(-45deg)
+      transform: rotate(-45deg);
     }
   }
   .next-btn {
@@ -305,7 +319,7 @@ $gallery-height: 300px;
     .icon-next {
       left: -21px;
       top: 26px;
-      transform: rotate(-45deg)
+      transform: rotate(-45deg);
     }
   }
   .row {
@@ -336,69 +350,84 @@ $gallery-height: 300px;
         border-radius: 15px;
         overflow: hidden;
         opacity: 0;
-        transition: .7s ease;
+        transition: 0.7s ease;
         position: absolute;
         background-repeat: no-repeat;
         background-size: 100% auto;
         background-position: center;
         background-color: #fff;
         cursor: pointer;
-        &.past1, &.current, &.future1 {
+        &.past1,
+        &.current,
+        &.future1 {
           display: inline-block;
           opacity: 1;
         }
         &.past1 {
           z-index: 2;
-          transform: translateX(-50%) scaleX(.54) rotateY(35deg) translateZ(60px) scaleY(.57);
-          box-shadow: 0 5px 15px rgba(0,0,0,.4);
+          transform: translateX(-50%) scaleX(0.54) rotateY(35deg)
+            translateZ(60px) scaleY(0.57);
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
           opacity: 1;
           &:hover {
-            transform: translateX(-50%) scaleX(.62) rotateY(35deg) translateZ(60px) scaleY(.57);
+            transform: translateX(-50%) scaleX(0.62) rotateY(35deg)
+              translateZ(60px) scaleY(0.57);
             opacity: 1;
-            box-shadow: 0 5px 20px rgba(0,0,0,.6);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
           }
         }
         &.past2 {
           z-index: 1;
-          transform: translateX(-80%) scaleX(.24) rotateY(20deg) translateZ(60px) scaleY(.37);
-          box-shadow: 0 5px 15px rgba(0,0,0,.4);
+          transform: translateX(-80%) scaleX(0.24) rotateY(20deg)
+            translateZ(60px) scaleY(0.37);
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
           opacity: 0.4;
           &:hover {
-            transform: translateX(-80%) scaleX(.30) rotateY(20deg) translateZ(60px) scaleY(.37);
+            transform: translateX(-80%) scaleX(0.3) rotateY(20deg)
+              translateZ(60px) scaleY(0.37);
             opacity: 0.6;
-            box-shadow: 0 5px 20px rgba(0,0,0,.6);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
           }
         }
         &.future1 {
           z-index: 2;
-          transform: translateX(50%) scaleX(.54) rotateY(-35deg) translateZ(60px) scaleY(.57);
-          box-shadow: 0 5px 15px rgba(0,0,0,.4);
+          transform: translateX(50%) scaleX(0.54) rotateY(-35deg)
+            translateZ(60px) scaleY(0.57);
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
           opacity: 1;
           &:hover {
-            transform: translateX(50%) scaleX(.62) rotateY(-35deg) translateZ(60px) scaleY(.57);
+            transform: translateX(50%) scaleX(0.62) rotateY(-35deg)
+              translateZ(60px) scaleY(0.57);
             opacity: 1;
-            box-shadow: 0 5px 20px rgba(0,0,0,.6);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
           }
         }
         &.future2 {
           z-index: 1;
-          transform: translateX(80%) scaleX(.24) rotateY(-20deg) translateZ(60px) scaleY(.37);
-          box-shadow: 0 5px 15px rgba(0,0,0,.4);
+          transform: translateX(80%) scaleX(0.24) rotateY(-20deg)
+            translateZ(60px) scaleY(0.37);
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
           opacity: 0.4;
           &:hover {
-            transform: translateX(80%) scaleX(.30) rotateY(-20deg) translateZ(60px) scaleY(.37);
+            transform: translateX(80%) scaleX(0.3) rotateY(-20deg)
+              translateZ(60px) scaleY(0.37);
             opacity: 0.6;
-            box-shadow: 0 5px 20px rgba(0,0,0,.6);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
           }
         }
         &.current {
           z-index: 4;
           transform: translateX(0) scaleX(1) rotateY(0) translateZ(0) scaleY(1);
-          box-shadow: 0 8px 15px rgba(0,0,0,.4), 60px 0 20px -30px rgba(0,0,0,.4), -60px 0 20px -30px rgba(0,0,0,.4);
+          box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4),
+            60px 0 20px -30px rgba(0, 0, 0, 0.4),
+            -60px 0 20px -30px rgba(0, 0, 0, 0.4);
           &:hover {
             opacity: 1;
-            transform: translateX(0) scaleX(1.02) rotateY(0) translateZ(0) scaleY(1);
-            box-shadow: 0 8px 20px rgba(0,0,0,.6), 60px 0 24px -30px rgba(0,0,0,.6), -60px 0 24px -30px rgba(0,0,0,.6);
+            transform: translateX(0) scaleX(1.02) rotateY(0) translateZ(0)
+              scaleY(1);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6),
+              60px 0 24px -30px rgba(0, 0, 0, 0.6),
+              -60px 0 24px -30px rgba(0, 0, 0, 0.6);
           }
         }
       }
@@ -409,7 +438,7 @@ $gallery-height: 300px;
       left: 30px;
       right: 0;
       z-index: -1;
-      transition: .7s ease;
+      transition: 0.7s ease;
       position: absolute;
       &.past1 {
         transform: translateX(-5%);
@@ -424,17 +453,17 @@ $gallery-height: 300px;
       }
       .type {
         font-size: 1.1em;
-        color: rgba(255, 255, 255, .7);
+        color: rgba(255, 255, 255, 0.7);
         margin-bottom: 10px;
-        text-shadow: 0 3px 5px rgba(0,0,0,.3);
+        text-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
         span {
           display: inline-block;
           padding-bottom: 5px;
-          border-bottom: 1px solid rgba(255, 255, 255, .2);
+          border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
       }
       .title {
-        text-shadow: 0 3px 5px rgba(0,0,0,.3);
+        text-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
         font-size: 2.2em;
         color: #fff;
         margin-bottom: 15px;
@@ -461,7 +490,7 @@ $gallery-height: 300px;
     border-radius: 1px;
     margin: 0 1px;
     background-color: rgba(255, 255, 255, 0.3);
-    transition: .6s ease;
+    transition: 0.6s ease;
     cursor: pointer;
     &.current {
       height: 2px;

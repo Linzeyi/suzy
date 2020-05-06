@@ -2,8 +2,13 @@
 <template>
   <div class="img-flow-wrap">
     <ul class="img-list">
-      <li class="img-box" v-for="(item, index) in imgs" :key="index" :class="{'on': currentIndex == index}">
-        <img :src="item.src" :alt="item.name">
+      <li
+        class="img-box"
+        v-for="(item, index) in imgs"
+        :key="index"
+        :class="{'on': currentIndex == index}"
+      >
+        <img :src="item.src" :alt="item.name" />
       </li>
     </ul>
     <div class="top-box row">
@@ -16,7 +21,13 @@
       <i class="iconfont icon-right">&#xf3b4;</i>
     </div>
     <div class="bottom-box row">
-      <div class="dot" v-for="(item, index) in imgs" :key="index" :class="{'on': currentIndex == index}" @click="selectImg(index)"></div>
+      <div
+        class="dot"
+        v-for="(item, index) in imgs"
+        :key="index"
+        :class="{'on': currentIndex == index}"
+        @click="selectImg(index)"
+      ></div>
     </div>
   </div>
 </template>
@@ -32,19 +43,22 @@ export default {
       }
     }
   },
-  data () {
+  data() {
     return {
       currentIndex: 0
-    } 
+    }
   },
   methods: {
-    prevImg () {
-      this.currentIndex = (this.currentIndex - 1) < 0 ? (this.imgs.length - this.currentIndex - 1) : (this.currentIndex - 1) % this.imgs.length
+    prevImg() {
+      this.currentIndex =
+        this.currentIndex - 1 < 0
+          ? this.imgs.length - this.currentIndex - 1
+          : (this.currentIndex - 1) % this.imgs.length
     },
-    nextImg () {
+    nextImg() {
       this.currentIndex = (this.currentIndex + 1) % this.imgs.length
     },
-    selectImg (index) {
+    selectImg(index) {
       this.currentIndex = index
     }
   }
@@ -68,14 +82,16 @@ $img-mask-bg-color: rgba(54, 54, 54, 0.8);
         opacity: 1;
         display: flex;
       }
-      img {  
+      img {
         width: 100%;
-
       }
     }
   }
-  .left-box, .right-box, .bottom-box, .top-box {
-    transition: .4s;
+  .left-box,
+  .right-box,
+  .bottom-box,
+  .top-box {
+    transition: 0.4s;
     position: absolute;
     user-select: none;
     background: $img-mask-bg-color;
@@ -92,7 +108,8 @@ $img-mask-bg-color: rgba(54, 54, 54, 0.8);
       padding-right: 20px;
     }
   }
-  .left-box, .right-box {
+  .left-box,
+  .right-box {
     opacity: 0;
     display: flex;
     justify-content: center;
@@ -112,12 +129,13 @@ $img-mask-bg-color: rgba(54, 54, 54, 0.8);
     .iconfont {
       font-size: 1em;
       color: #fff;
-      opacity: .7;
+      opacity: 0.7;
       transform: rotate(-45deg);
-      transition: .3s;
+      transition: 0.3s;
     }
   }
-  .top-box, .bottom-box {
+  .top-box,
+  .bottom-box {
     padding: 10px 0;
     left: 0;
     right: 0;
@@ -127,7 +145,7 @@ $img-mask-bg-color: rgba(54, 54, 54, 0.8);
     top: -60px;
     color: #fff;
     span {
-      font-size: .8em;
+      font-size: 0.8em;
     }
   }
   .bottom-box {
@@ -138,14 +156,14 @@ $img-mask-bg-color: rgba(54, 54, 54, 0.8);
       background: #fff;
       border-radius: 50%;
       margin: 0 2px;
-      opacity: .6;
+      opacity: 0.6;
       cursor: pointer;
       &.on {
         opacity: 1;
       }
     }
     .index {
-      font-size: .8em;
+      font-size: 0.8em;
       margin-left: 5px;
       color: #fff;
     }
@@ -163,7 +181,7 @@ $img-mask-bg-color: rgba(54, 54, 54, 0.8);
       top: 0;
     }
     .bottom-box {
-      bottom: 0
+      bottom: 0;
     }
   }
 }

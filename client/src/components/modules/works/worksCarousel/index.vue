@@ -1,5 +1,3 @@
 <template>
-  <div class="works-carousel-wrap">
-    
-  </div>
+  <div class="works-carousel-wrap"></div>
 </template>

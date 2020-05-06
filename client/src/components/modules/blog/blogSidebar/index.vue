@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       options: [
         {
@@ -42,7 +42,7 @@ export default {
     .option-list {
       display: inline-block;
       .option-li {
-        transition: .2s;
+        transition: 0.2s;
         border-radius: 4px;
         color: #fff;
         width: 44px;
@@ -72,7 +72,7 @@ export default {
             font-size: 20px;
           }
           span {
-            transition: .3s;
+            transition: 0.3s;
             opacity: 0;
             font-size: 14px;
             line-height: 23px;

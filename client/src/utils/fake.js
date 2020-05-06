@@ -3,14 +3,16 @@ export const blogsData = [
     title: '我的第一篇博客',
     createTime: new Date(),
     changeTime: new Date(),
-    desc: '这是第一篇博客，用来测试。这是第一篇博客，用来测试。这是第一篇博客，用来测试。这是第一篇博客，用来测试。',
+    desc:
+      '这是第一篇博客，用来测试。这是第一篇博客，用来测试。这是第一篇博客，用来测试。这是第一篇博客，用来测试。',
     coverImg: '/img/blogs/1.jpg',
     author: {
       name: 'zeyi.lin',
       sex: 1,
       accountID: 13107927091
     }
-  }, {
+  },
+  {
     title: '我的第二篇博客',
     createTime: new Date(),
     changeTime: new Date(),
@@ -21,7 +23,8 @@ export const blogsData = [
       sex: 1,
       accountID: 13107927091
     }
-  }, {
+  },
+  {
     title: '我的第三篇博客',
     createTime: new Date(),
     changeTime: new Date(),
@@ -32,7 +35,8 @@ export const blogsData = [
       sex: 1,
       accountID: 13107927091
     }
-  }, {
+  },
+  {
     title: '我的第四篇博客',
     createTime: new Date(),
     changeTime: new Date(),
@@ -118,7 +122,8 @@ export const worksData = [
         name: '30天纪念'
       }
     ]
-  }, {
+  },
+  {
     title: '直叶',
     desc: '刀剑神域-直叶',
     imgs: [
@@ -126,7 +131,8 @@ export const worksData = [
         src: '/img/works/1.jpg'
       }
     ]
-  }, {
+  },
+  {
     title: 'K ON',
     desc: '轻音少女',
     imgs: [
@@ -134,34 +140,42 @@ export const worksData = [
         src: '/img/works/2.jpg'
       }
     ]
-  }, {
+  },
+  {
     title: '西二在线头像',
     desc: '西二在线工作室，给学长学姐头像绘制的',
     imgs: [
       {
         src: '/img/works/西二/栗子.png',
         name: '栗子'
-      }, {
+      },
+      {
         src: '/img/works/西二/陈少铭.png',
         name: '陈少铭'
-      }, {
+      },
+      {
         src: '/img/works/西二/陈宇朋.png',
         name: '陈宇朋'
-      }, {
+      },
+      {
         src: '/img/works/西二/胡心颖.png',
         name: '胡心颖'
-      }, {
+      },
+      {
         src: '/img/works/西二/江嗣嘉.png',
         name: '江嗣嘉'
-      }, {
+      },
+      {
         src: '/img/works/西二/李旭升.png',
         name: '李旭升'
-      }, {
+      },
+      {
         src: '/img/works/西二/刘铷斐.png',
         name: '刘铷斐'
       }
     ]
-  }, {
+  },
+  {
     title: '记者团学姐',
     desc: '记者团前任部长',
     imgs: [
@@ -169,7 +183,8 @@ export const worksData = [
         src: '/img/works/换届学姐.jpg'
       }
     ]
-  }, {
+  },
+  {
     title: '返魂少女',
     desc: '返魂少女',
     imgs: [
@@ -177,7 +192,8 @@ export const worksData = [
         src: '/img/works/3.jpg'
       }
     ]
-  }, {
+  },
+  {
     title: '诗乃',
     desc: '刀剑神域-诗乃',
     imgs: [

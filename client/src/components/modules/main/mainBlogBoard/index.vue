@@ -5,10 +5,15 @@
       <div class="row">
         <h1 class="title">近期博客</h1>
         <div class="option-item search-item">
-          <input :class="{'on': searchVal}" placeholder="搜索博客" type="text" v-model="searchVal">
+          <input :class="{'on': searchVal}" placeholder="搜索博客" type="text" v-model="searchVal" />
           <i class="iconfont icon-search" @click="handlerSearch()">&#xf3cb;</i>
         </div>
-        <div v-if="showListTypeBtn" class="option-item" :class="{'disabled': isLoading}" @click="toggleListType()">
+        <div
+          v-if="showListTypeBtn"
+          class="option-item"
+          :class="{'disabled': isLoading}"
+          @click="toggleListType()"
+        >
           <i class="iconfont icon-list" v-if="listType == 'list'">&#xe742;</i>
           <i class="iconfont icon-card inverted" v-if="listType == 'grids'">&#xe73f;</i>
         </div>
@@ -20,7 +25,11 @@
     </div>
     <div class="blogList-wrap-content">
       <loadingCover :isLoading="isLoading" />
-      <blogList :blogsData="sortBlogsData" :showTimeline="true" v-if="!isLoading && listType == 'list'" />
+      <blogList
+        :blogsData="sortBlogsData"
+        :showTimeline="true"
+        v-if="!isLoading && listType == 'list'"
+      />
       <blogGrid :blogsData="sortBlogsData" v-if="!isLoading && listType == 'grids'" />
     </div>
   </div>
@@ -39,7 +48,7 @@ export default {
       default: true
     }
   },
-  data () {
+  data() {
     return {
       isLoading: false,
       sortType: false,
@@ -47,13 +56,12 @@ export default {
       blogsData: this.FakeUtils.blogsData
     }
   },
-  mounted () {
-  },
+  mounted() {},
   computed: {
-    sortBlogsData () {
+    sortBlogsData() {
       let arr = []
       if (this.sortType) {
-        for (let i = this.blogsData.length - 1; i >= 0 ; i--) {
+        for (let i = this.blogsData.length - 1; i >= 0; i--) {
           arr.push(this.blogsData[i])
         }
       } else {
@@ -64,27 +72,28 @@ export default {
     }
   },
   methods: {
-    getBlogs () {
+    getBlogs() {
       this.setLoading(true)
       setTimeout(() => {
         this.setLoading(false)
       }, 1200)
     },
-    handlerSearch () {
-      
-    },
-    toggleListType () {
+    handlerSearch() {},
+    toggleListType() {
       if (!this.isLoading) {
-        this.$emit('update:listType', this.listType == 'list' ? 'grids' : 'list')
+        this.$emit(
+          'update:listType',
+          this.listType == 'list' ? 'grids' : 'list'
+        )
         this.getBlogs()
       }
     },
-    toggleSort () {
+    toggleSort() {
       if (!this.isLoading) {
         this.sortType = !this.sortType
       }
     },
-    setLoading (flag) {
+    setLoading(flag) {
       this.isLoading = flag
     }
   }
@@ -102,5 +111,5 @@ export default {
     position: relative;
     min-height: 180px;
   }
-}  
+}
 </style>

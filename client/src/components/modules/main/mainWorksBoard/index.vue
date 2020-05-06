@@ -5,12 +5,14 @@
       <div class="row">
         <h1 class="title">作品展</h1>
         <div class="option-item">
-          <i 
-          class="iconfont change-icon" 
-          v-for="(item, index) in showTypes" 
-          :key="index" 
-          :class="{'on': selectedShowType == item.name}" 
-          @click="selectShowType(item)" v-html="item.icon"></i>
+          <i
+            class="iconfont change-icon"
+            v-for="(item, index) in showTypes"
+            :key="index"
+            :class="{'on': selectedShowType == item.name}"
+            @click="selectShowType(item)"
+            v-html="item.icon"
+          ></i>
         </div>
       </div>
     </div>
@@ -33,7 +35,7 @@ export default {
       }
     }
   },
-  data () {
+  data() {
     return {
       isLoading: false,
       selectedShowType: 'list',
@@ -53,23 +55,23 @@ export default {
       ]
     }
   },
-  mounted () {
+  mounted() {
     this.getWorks()
   },
   methods: {
-    getWorks () {
+    getWorks() {
       this.setLoading(true)
       setTimeout(() => {
         this.setLoading(false)
       }, 1200)
     },
-    selectShowType (item) {
+    selectShowType(item) {
       if (!this.isLoading) {
         this.selectedShowType = item.name
         this.getWorks()
       }
     },
-    setLoading (flag) {
+    setLoading(flag) {
       this.isLoading = flag
     }
   }
