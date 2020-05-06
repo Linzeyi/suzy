@@ -1,3 +1,5 @@
+// 时间工具类方法
+
 //时间戳转日期
 export function milliSecondToDate(msd) {
   var time = parseFloat(msd)
