@@ -1,3 +1,4 @@
+<!-- 基础容器 -->
 <template>
   <div id="default">
     <mainNav />
