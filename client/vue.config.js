@@ -9,10 +9,10 @@ module.exports = {
       }
     }
   },
-  configureWebpack:{
+  configureWebpack: {
     externals: {
       'vue': 'Vue',
-      'jquery' : '$',
+      'jquery': '$',
       'vue-router': 'VueRouter',
       'axios': 'axios',
       'vuex': 'Vuex'
