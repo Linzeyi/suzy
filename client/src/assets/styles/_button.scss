@@ -1,0 +1,66 @@
+button {
+  font-size: 1em;
+  padding: 5px 15px;
+  border: none;
+  border-radius: 6px;
+  outline: none;
+  transition: .3s;
+  cursor: pointer;
+  &:focus, &:active, &:hover {
+    border: none;
+    outline: none;
+  }
+  &[class*="-mini"] {
+    font-size: 0.8em;
+    padding: 3px 10px;
+  }
+  &[class*="-line"] {
+    border: 1px solid #ddd;
+    background: transparent;
+    color: #7a7a7a;
+    &:hover {
+      border-color: #6bb8db;
+      color: #0a94d4;
+      box-shadow: 0 5px 10px rgba(0, 99, 138, 0.15);
+      text-shadow: none;
+    }
+    &:active {
+      border-color: #58aacf;
+      color: #0278af;
+      box-shadow: 0 5px 10px 1px rgba(0, 99, 138, 0.35);
+      text-shadow: none;
+    }
+    &[class*="-white"] {
+      border-color: rgba(255, 255, 255, .4);
+      color: #ffffff;
+      text-shadow: 0 2px 2px rgba(0,0,0,.2);
+      &:hover {
+        border-color: rgba(255, 255, 255, .8);
+        background-color: #fff;
+        color: #666;
+        box-shadow: 0 5px 10px rgba(0,0,0,.15);
+        text-shadow: none;
+      }
+    }
+  }
+  &[class*="btn-fill"] {
+    border-color: #ddd;
+    background: #aaa;
+    color: #fff;
+  }
+  &[class*="btn-more"] {
+    font-size: .8em;
+    background: #acabab;
+    border-radius: 20px;
+    color: #fff;
+    &.no-more {
+      cursor: default;
+    }
+    &:not(no-more):hover {
+      background: #8f8f8f;
+    }
+    &:not(no-more):active {
+      background: #5f5f5f;
+    }
+  }
+}
