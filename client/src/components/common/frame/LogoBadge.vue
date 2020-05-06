@@ -24,6 +24,7 @@
 
 <script>
 export default {
+  name: 'logoBadge',
   props: {
     zIndex: {
       type: Number,

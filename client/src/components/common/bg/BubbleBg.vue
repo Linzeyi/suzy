@@ -20,6 +20,7 @@
 
 <script>
 export default {
+  name: 'bubbleBg',
   props: {
     zIndex: {
       type: Number,

@@ -13,6 +13,7 @@
 
 <script>
 export default {
+  name: 'metalFrame',
   props: {
     lineLogoBadgeOption: {
       type: Object,

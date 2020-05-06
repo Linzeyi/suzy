@@ -23,6 +23,7 @@
 
 <script>
 export default {
+  name: 'imgFlow',
   props: {
     imgs: {
       type: Array,

@@ -28,6 +28,7 @@
 
 <script>
 export default {
+  name: 'mainBlogBoard',
   props: {
     listType: {
       type: String,

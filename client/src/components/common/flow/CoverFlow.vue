@@ -52,6 +52,7 @@
 
 <script>
 export default {
+  name: 'coverFlow',
   props: {
     colorMaskShow: { // 颜色滤镜
       type: Boolean,

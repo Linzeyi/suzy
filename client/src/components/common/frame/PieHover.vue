@@ -77,6 +77,7 @@
 
 <script>
 export default {
+  name: 'pieHover',
   props: {
     showPieHover: {
       type: Boolean,

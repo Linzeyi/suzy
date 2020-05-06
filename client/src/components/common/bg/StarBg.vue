@@ -7,6 +7,12 @@
   </div>
 </template>
 
+<script>
+export default {
+  name: 'starBg'
+}
+</script>
+
 <style lang="scss" scoped>
 #star_bg {
   position: absolute;
