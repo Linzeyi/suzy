@@ -26,7 +26,13 @@
           </div>
         </ul>
       </div>
-      <div class="setting-panel"></div>
+      <div class="setting-panel">
+        <div class="row">
+          <div class="setting-item" v-for="(item, index) in settingItems" :key="index">
+            <dropdown :propItem="item" :option="settingOption"></dropdown>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -93,7 +99,25 @@ export default {
           desc: 'file',
           path: '/file'
         }
-      ]
+      ],
+      settingItems: [
+        {
+          title: '',
+          icon: '&#xe60d;',
+          path: '',
+          children: [
+            {
+              icon: '&#xe924;',
+              path: '/personal/intro'
+            },
+            {
+              icon: '&#xe602;',
+              path: '/personal'
+            }
+          ]
+        }
+      ],
+      settingOption: {}
     }
   },
   mounted() {
@@ -210,7 +234,7 @@ export default {
           height: 100%;
           line-height: $mainNav-height;
           display: inline-block;
-          font-size: 1em;
+          font-size: 1rem;
           position: relative;
           color: $mainNav-color_font;
           cursor: pointer;
@@ -230,6 +254,15 @@ export default {
     }
     .setting-panel {
       min-width: 140px;
+      .setting-item {
+        font-size: 1rem;
+        height: 100%;
+        line-height: $mainNav-height;
+        display: inline-block;
+        position: relative;
+        color: $mainNav-color_font;
+        cursor: pointer;
+      }
     }
   }
 }

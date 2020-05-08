@@ -15,6 +15,16 @@ export default {
     return Object.prototype.toString.call(value) === types[type]
   },
 
+  // 检验是否为基础类型
+  CheckBaseType(value) {
+    return !this.CheckReferenceType(value)
+  },
+
+  // 检验是否为引用类型
+  CheckReferenceType(value) {
+    return this.CheckObject(value) || this.CheckArray(value) || this.CheckFunction(value)
+  },
+
   // 检验是否为Boolean
   CheckBoolean(value) {
     return this.CheckType(value, 'boolean')
@@ -138,7 +148,7 @@ export default {
     } else {
       for (let i = 0; i < nodes.length; i++) {
         let node = nodes[i]
-        if (node[_option.value] === currentNode[_option.value]) {
+        if (this.IsObjectEqual(node, currentNode)) {
           return node
         }
         if (!this.CheckEmpty(node[_option.children])) {
@@ -155,5 +165,63 @@ export default {
   // 根据节点对象检测是否存在该孩子节点
   CheckChildByNode(nodes, currentNode, option = {}) {
     return !this.CheckEmpty(this.GetChildByNode(nodes, currentNode, option))
+  },
+
+  // 检测基础类型数据是否相等
+  IsBaseTypeEqual(x, y) {
+    if (x === y) {
+      //排除 +0 == -0
+      return x !== 0 || y !== 0 || 1 / x === 1 / y
+    } else {
+      return x !== x && y !== y
+    }
+  },
+
+  // 检测对象是否相等
+  IsObjectEqual(obj1, obj2) {
+    if (this.CheckObject(obj1) && this.CheckObject(obj2)) {
+      if (this.CheckEmptyObject(obj1) && this.CheckEmptyObject(obj2)) {
+        // {} === {}
+        return true
+      } else if (this.CheckEmptyObject(obj1) || this.CheckEmptyObject(obj2)) {
+        // 空对象与非空对象不相等
+        return false
+      } else if (Object.keys(obj1).length !== Object.keys(obj2).length) {
+        // 非空对象属性数不一致
+        return false
+      } else {
+        let flag = true
+        for (let i = 0; i < Object.keys(obj1).length; i++) {
+          const el1 = obj1[Object.keys(obj1)[i]]
+          const el2 = obj2[Object.keys(obj2)[i]]
+          if (this.CheckBaseType(el1) && this.CheckBaseType(el2)) {
+            flag = this.IsBaseTypeEqual(el1, el2)
+          } else if (this.CheckFunction(el1)) {
+            flag = JSON.stringify(el1) === JSON.stringify(el2)
+          } else if (this.CheckArray(el1)) {
+            if (this.CheckArray(el2)) {
+              let flag2 = true
+              for (let j = 0; j < Object.keys(el1).length; j++) {
+                const subEl1 = el1[Object.keys(el1)[j]]
+                const subEl2 = el2[Object.keys(el2)[j]]
+                flag2 = this.IsObjectEqual(subEl1, subEl2)
+              }
+              flag = flag2
+            } else {
+              flag = false
+            }
+          } else if (this.CheckObject(el1)) {
+            if (this.CheckObject(el2)) {
+              flag = this.IsObjectEqual(el1, el2)
+            } else {
+              flag = false
+            }
+          }
+        }
+        return flag
+      }
+    } else {
+      return false
+    }
   }
 }

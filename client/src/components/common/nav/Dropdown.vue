@@ -9,7 +9,10 @@
   >
     <div class="dropdown-link-wrap" @click="linkWrapClick">
       <slot name="dropdown-link">
-        <span class="dropdown-link">{{propItem[dropdownOption.title]}}</span>
+        <span class="dropdown-link">
+          <i class="iconfont" v-html="propItem[dropdownOption.icon]"></i>
+          {{propItem[dropdownOption.title]}}
+        </span>
       </slot>
     </div>
 
@@ -71,11 +74,7 @@ export default {
     option: {
       type: Object,
       default: () => {
-        return {
-          value: 'value',
-          title: 'title',
-          children: 'children'
-        }
+        return {}
       }
     }
   },
@@ -86,13 +85,14 @@ export default {
       dropdownOption: {
         value: 'value',
         title: 'title',
+        icon: 'icon',
         children: 'children'
       }
     }
   },
   computed: {
     checkSelected() {
-      return this.propItem[this.dropdownOption.value] === this.currentItem[this.dropdownOption.value]
+      return this.$verify.IsObjectEqual(this.propItem, this.currentItem)
     }
   },
   mounted() {
@@ -175,6 +175,9 @@ export default {
     width: 100%;
     padding: 0 20px;
     opacity: 0.7;
+    > .iconfont {
+      opacity: 0.7;
+    }
   }
   .dropdown-list-wrap {
     position: absolute;
@@ -194,22 +197,20 @@ export default {
     }
   }
   &:hover,
+  &.on,
   &.selected {
     > .dropdown-link-wrap > .dropdown-link {
       // background-color: #fff;
       // color: $primary-color;
       opacity: 1;
       font-weight: 600;
+      > .iconfont {
+        opacity: 1;
+      }
     }
   }
   &.hover,
   &.on {
-    > .dropdown-link-wrap > .dropdown-link {
-      // background-color: #fff;
-      // color: $primary-color;
-      opacity: 1;
-      font-weight: 600;
-    }
     > .dropdown-list-wrap {
       opacity: 1;
       z-index: 10;
