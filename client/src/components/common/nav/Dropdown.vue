@@ -195,7 +195,7 @@ export default {
            * 根据弹出方位进行调整
            */
           if (this.placement === 'bottom') {
-            if (dropdownPos.bottom + listPos.height / 2 >= this.screenHeight) {
+            if (dropdownPos.bottom + listPos.height >= this.screenHeight) {
               // 下拉窗超过视窗底部，改为上浮
               this.setTopPopPos()
             } else {
@@ -270,10 +270,7 @@ export default {
       this.$nextTick(() => {
         let dropdownPos = this.$refs['dropdown-el'].getBoundingClientRect()
         let listPos = this.$refs['dropdown-list-wrap-el'].getBoundingClientRect()
-        if (listPos.height != 0) {
-          console.log('父容器top:', dropdownPos.top, '弹窗top:', listPos.top, '弹窗bottom:', listPos.bottom, '弹窗height:', listPos.height)
-        }
-        if (dropdownPos.top + listPos.height + 5 >= this.screenHeight) {
+        if (dropdownPos.bottom + listPos.height + 5 >= this.screenHeight) {
           this.$refs['dropdown-list-wrap-el'].style.top = -(dropdownPos.top + listPos.height + 5 - this.screenHeight) + 'px'
         }
       })
