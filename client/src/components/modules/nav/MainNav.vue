@@ -27,9 +27,9 @@
         </ul>
       </div>
       <div class="setting-panel">
-        <div class="row">
+        <div class="row justify-end">
           <div class="setting-item" v-for="(item, index) in settingItems" :key="index">
-            <dropdown :propItem="item" :option="settingOption"></dropdown>
+            <dropdown :propItem="item" :option="settingOption" @itemClick="handlePageChange"></dropdown>
           </div>
         </div>
       </div>
@@ -55,12 +55,12 @@ export default {
         {
           title: '博客',
           desc: 'blog',
-          path: '/blog',
+          path: '',
           children: [
             {
               title: '我收藏的',
               desc: 'collected',
-              path: '/blog/collected'
+              path: ''
             },
             {
               title: '集',
@@ -108,11 +108,41 @@ export default {
           children: [
             {
               icon: '&#xe924;',
-              path: '/personal/intro'
+              path: ''
+            },
+            {
+              type: 'divider'
             },
             {
               icon: '&#xe602;',
-              path: '/personal'
+              path: '',
+              children: [
+                {
+                  title: '编辑资料',
+                  icon: '',
+                  path: ''
+                },
+                {
+                  title: '编辑资料',
+                  icon: '',
+                  path: ''
+                },
+                {
+                  title: '编辑资料',
+                  icon: '',
+                  path: ''
+                },
+                {
+                  title: '编辑资料',
+                  icon: '',
+                  path: ''
+                },
+                {
+                  title: '编辑资料',
+                  icon: '',
+                  path: ''
+                }
+              ]
             }
           ]
         }

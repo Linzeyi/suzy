@@ -2,7 +2,7 @@
 <template>
   <div id="blog-page">
     <div class="main-container">
-      <div class="row align-start space-between">
+      <div class="row align-start justify-between">
         <blogSidebar />
         <div class="col-10">
           <blogList :blogsData="blogsData" />

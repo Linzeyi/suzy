@@ -50,7 +50,13 @@ body {
     &.align-start {
       align-items: flex-start;
     }
-    &.space-between {
+    &.align-end {
+      align-items: flex-end;
+    }
+    &.justify-end {
+      justify-content: flex-end;
+    }
+    &.justify-between {
       justify-content: space-between;
     }
     &.reverse-row {

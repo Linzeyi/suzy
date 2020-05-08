@@ -28,7 +28,9 @@
             v-for="(item, index) in propItem[dropdownOption.children]"
             :key="index"
           >
+            <div class="dropdown-divider" v-if="item[dropdownOption.type] === 'divider'"></div>
             <dropdown
+              v-else
               placement="right"
               :propItem="item"
               :trigger="trigger"
@@ -86,6 +88,7 @@ export default {
         value: 'value',
         title: 'title',
         icon: 'icon',
+        type: 'type',
         children: 'children'
       }
     }
@@ -93,17 +96,39 @@ export default {
   computed: {
     checkSelected() {
       return this.$verify.IsObjectEqual(this.propItem, this.currentItem)
+    },
+    screenWidth() {
+      return this.$store.getters['window/screenWidth']
+    },
+    screenHeight() {
+      return this.$store.getters['window/screenHeight']
+    }
+  },
+  watch: {
+    screenWidth() {
+      this.adjustDropdownListPos()
+    },
+    screenHeight() {
+      this.adjustDropdownListPos()
+    },
+    isHover(newVal, oldVal) {
+      if (newVal) {
+        this.setDropdownListPos()
+      }
+    },
+    isFocus(newVal, oldVal) {
+      if (newVal) {
+        this.setDropdownListPos()
+      }
     }
   },
   mounted() {
     this.initOption()
-
     document.addEventListener('click', e => {
       if (!this.$el.contains(e.target)) {
         this.isFocus = false
       }
     })
-    this.setDropdownPos()
   },
   methods: {
     initOption() {
@@ -119,8 +144,6 @@ export default {
         } else {
           this.isFocus = true
         }
-
-        this.setDropdownPos()
       }
 
       this.emitItemClick(this.propItem)
@@ -135,7 +158,6 @@ export default {
     showDropdownList() {
       if (this.trigger === 'hover') {
         this.isHover = true
-        this.setDropdownPos()
       }
     },
     hideDropdownList() {
@@ -143,18 +165,117 @@ export default {
         this.isHover = false
       }
     },
-    setDropdownPos() {
+    setDropdownListPos() {
+      // 初次设置下拉弹窗的定位
+      this.$nextTick(() => {
+        if (!this.$verify.CheckEmpty(this.$refs['dropdown-list-wrap-el'])) {
+          let pos = this.$refs['dropdown-list-wrap-el'].getBoundingClientRect()
+          // console.log(this.$refs['dropdown-list-wrap-el'], h, w, listH, listW, this.screenHeight, this.screenWidth, 'top:', pos.top, 'right:', pos.right, 'bottom:', pos.bottom, 'left:', pos.left)
+          if (this.placement === 'bottom') {
+            this.setBottomPopPos()
+          } else if (this.placement === 'top') {
+            this.setTopPopPos()
+          } else if (this.placement === 'right') {
+            this.setRightPopPos()
+          } else if (this.placement === 'left') {
+            this.setLeftPopPos()
+          }
+          this.adjustDropdownListPos()
+        }
+      })
+    },
+    adjustDropdownListPos() {
+      // 根据视窗大小的变化调整下拉弹窗的定位
+      this.$nextTick(() => {
+        if (!this.$verify.CheckEmpty(this.$refs['dropdown-el']) && !this.$verify.CheckEmpty(this.$refs['dropdown-list-wrap-el'])) {
+          let dropdownPos = this.$refs['dropdown-el'].getBoundingClientRect()
+          let listPos = this.$refs['dropdown-list-wrap-el'].getBoundingClientRect()
+
+          /**
+           * 根据弹出方位进行调整
+           */
+          if (this.placement === 'bottom') {
+            if (dropdownPos.bottom + listPos.height >= this.screenHeight) {
+              // 下拉窗超过视窗底部，改为上浮
+              this.setTopPopPos()
+            } else {
+              this.setBottomPopPos()
+            }
+          }
+          if (this.placement === 'top') {
+            if (dropdownPos.top - listPos.height <= 0) {
+              // 下拉窗超过视窗顶部，改为下浮
+              this.setBottomPopPos()
+            } else {
+              this.setTopPopPos()
+            }
+          }
+          if (this.placement === 'right') {
+            if (dropdownPos.right + listPos.width >= this.screenWidth) {
+              // 右悬浮下拉框超过视窗最右端，改为左悬浮
+              this.setLeftPopPos()
+            } else {
+              this.setRightPopPos()
+            }
+          }
+          if (this.placement === 'left') {
+            if (dropdownPos.left <= listPos.width) {
+              // 左悬浮下拉框超过视窗最左端，改为右悬浮
+              this.setRightPopPos()
+            } else {
+              this.setLeftPopPos()
+            }
+          }
+        }
+      })
+    },
+    setBottomPopPos() {
+      // 设置下悬浮弹窗定位
       this.$nextTick(() => {
         let h = this.$refs['dropdown-el'].offsetHeight
+        this.$refs['dropdown-list-wrap-el'].style.top = h + 'px'
+        this.$refs['dropdown-list-wrap-el'].style.left = '0px'
+        this.$refs['dropdown-list-wrap-el'].style['padding'] = '5px 0 0 0'
+      })
+    },
+    setTopPopPos() {
+      // 设置上悬浮弹窗定位
+      this.$nextTick(() => {
+        let listH = this.$refs['dropdown-list-wrap-el'].offsetHeight
+        this.$refs['dropdown-list-wrap-el'].style.top = -listH + 'px'
+        this.$refs['dropdown-list-wrap-el'].style.left = '0px'
+        this.$refs['dropdown-list-wrap-el'].style['padding'] = '0 0 5px 0'
+      })
+    },
+    setLeftPopPos() {
+      // 设置左悬浮弹窗定位
+      this.$nextTick(() => {
+        let listW = this.$refs['dropdown-list-wrap-el'].offsetWidth
+        this.$refs['dropdown-list-wrap-el'].style.left = -listW + 'px'
+        this.$refs['dropdown-list-wrap-el'].style['padding'] = '0 5px 0 0'
+        this.setOverTopOrBottomPos()
+      })
+    },
+    setRightPopPos() {
+      // 设置右悬浮弹窗定位
+      this.$nextTick(() => {
         let w = this.$refs['dropdown-el'].offsetWidth
-        if (this.placement === 'bottom') {
-          this.$refs['dropdown-list-wrap-el'].style.top = h + 'px'
-          this.$refs['dropdown-list-wrap-el'].style.left = '0px'
-          this.$refs['dropdown-list-wrap-el'].style['padding-top'] = '5px'
-        } else if (this.placement === 'right') {
+        this.$refs['dropdown-list-wrap-el'].style.left = w + 'px'
+        this.$refs['dropdown-list-wrap-el'].style['padding'] = '0 0 0 5px'
+        this.setOverTopOrBottomPos()
+      })
+    },
+    setOverTopOrBottomPos() {
+      // 避免弹窗触顶or触底超出
+      this.$nextTick(() => {
+        let dropdownPos = this.$refs['dropdown-el'].getBoundingClientRect()
+        let listPos = this.$refs['dropdown-list-wrap-el'].getBoundingClientRect()
+        if (dropdownPos.top + listPos.height + 5 >= this.screenHeight) {
+          this.$refs['dropdown-list-wrap-el'].style.top = -(dropdownPos.top + listPos.height + 5 - this.screenHeight) + 'px'
+        } else if (dropdownPos.top + 5 <= 0) {
+          this.$refs['dropdown-list-wrap-el'].style.top = -dropdownPos.top + 5 + 'px'
+        } else {
           this.$refs['dropdown-list-wrap-el'].style.top = '0px'
-          this.$refs['dropdown-list-wrap-el'].style.left = w + 'px'
-          this.$refs['dropdown-list-wrap-el'].style['padding-left'] = '5px'
         }
       })
     },
@@ -190,18 +311,24 @@ export default {
       background-color: $primary-color;
       border-radius: 4px;
       color: #fff;
-      .dropdown-li {
-        height: 30px;
+      .dropdown {
         line-height: 30px;
       }
+    }
+
+    .dropdown-divider {
+      height: 0;
+      width: 80%;
+      margin: 4px auto 6px auto;
+      border: none;
+      border-top: 1px solid #fff;
+      opacity: 0.5;
     }
   }
   &:hover,
   &.on,
   &.selected {
     > .dropdown-link-wrap > .dropdown-link {
-      // background-color: #fff;
-      // color: $primary-color;
       opacity: 1;
       font-weight: 600;
       > .iconfont {
