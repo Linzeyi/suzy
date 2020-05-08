@@ -17,7 +17,7 @@ export default {
   data() {
     return {
       blogListType: 'list',
-      blogsData: this.FakeUtils.blogsData
+      blogsData: this.$fake.blogsData
     }
   }
 }

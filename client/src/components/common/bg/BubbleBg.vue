@@ -11,7 +11,7 @@
         'left': getRandomLeft(bubbleIndex),
         'width': item.size + 'px',
         'height': item.size + 'px',
-        'animation': item.time + MathUtils.GetRandom(-5, 5) + 's animBubble' + index + '-' + bubbleIndex + ' linear infinite',
+        'animation': item.time + $math.GetRandom(-5, 5) + 's animBubble' + index + '-' + bubbleIndex + ' linear infinite',
         'background-color': bgColor
       }"
       ></div>
@@ -61,14 +61,12 @@ export default {
   computed: {
     getRandomBottom() {
       return function(index) {
-        return (
-          this.MathUtils.GetRandom(-120, -10) + Math.floor(index / 10) + '%'
-        )
+        return this.$math.GetRandom(-120, -10) + Math.floor(index / 10) + '%'
       }
     },
     getRandomLeft() {
       return function(index) {
-        return this.MathUtils.GetRandom(0, this.screenWidth) + index + 'px'
+        return this.$math.GetRandom(0, this.screenWidth) + index + 'px'
       }
     },
     screenWidth() {
@@ -86,10 +84,7 @@ export default {
         let rules = ss[i].cssRules ? ss[i].cssRules : ss[i].rules
         for (let j = 0; j < rules.length; j++) {
           let name = rules[j].selectorText
-          if (
-            !this.JudgeUtils.IsUndefined(name) &&
-            name.search('bubble') != -1
-          ) {
+          if (!this.JudgeUtils.IsUndefined(name) && name.search('bubble') != -1) {
             bubbleCssRule = ss[i]
             break
           }
@@ -108,10 +103,10 @@ export default {
             }
             100% {
               left: ` +
-            this.MathUtils.GetRandom(0, this.screenWidth) +
+            this.$math.GetRandom(0, this.screenWidth) +
             `px;
               bottom: ` +
-            this.MathUtils.GetRandom(30, 100) +
+            this.$math.GetRandom(30, 100) +
             `%
             }
           }`

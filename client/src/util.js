@@ -1,17 +1,12 @@
 /* global Vue */
-import * as MathUtils from '@/utils/math.js'
-import * as JudgeUtils from '@/utils/judge.js'
-import * as TimeUtils from '@/utils/time.js'
-
-import * as FakeUtils from '@/utils/fake.js'
 
 //将js里自己写的通用方法注册到Vue.prototype中
-//全局调用语句：this.xxxUtils.func()
+//全局调用语句：this.$xxx.func()
 export default {
   install(Vue) {
-    Vue.prototype.MathUtils = MathUtils
-    Vue.prototype.JudgeUtils = JudgeUtils
-    Vue.prototype.TimeUtils = TimeUtils
-    Vue.prototype.FakeUtils = FakeUtils
+    Vue.prototype.$math = require('@/utils/math.js').default
+    Vue.prototype.$verify = require('@/utils/verify.js').default
+    Vue.prototype.$time = require('@/utils/time.js').default
+    Vue.prototype.$fake = require('@/utils/fake.js').default
   }
 }

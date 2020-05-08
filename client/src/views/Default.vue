@@ -17,7 +17,7 @@ export default {
 <style lang="scss" scoped>
 .container {
   position: absolute;
-  top: $main-nav-height;
+  top: $mainNav-height;
   bottom: 0;
   left: 0;
   right: 0;
@@ -30,7 +30,7 @@ export default {
     left: 0;
     min-height: 100vh;
     z-index: -1;
-    background-color: #dadee2;
+    // background-color: #dadee2;
   }
 }
 </style>

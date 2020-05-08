@@ -129,13 +129,13 @@ export default {
   top: 0;
   left: 0;
   right: 0;
-  height: $main-nav-height;
-  background-color: $nav-bg-color;
+  height: $mainNav-height;
+  background-color: $mainNav-color_bg;
   box-shadow: 0 0 35px 8px rgba(17, 22, 32, 0.9);
   z-index: 20;
   .top-row {
     position: relative;
-    height: $main-nav-height;
+    height: $mainNav-height;
     padding: 0 40px;
     display: flex;
     align-items: center;
@@ -148,11 +148,7 @@ export default {
       left: 0;
       right: 0;
       position: absolute;
-      background-image: radial-gradient(
-        ellipse at bottom,
-        #1b2735 0%,
-        #090a0f 100%
-      );
+      background-image: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
       background-size: cover;
       background-position: center;
     }
@@ -244,7 +240,7 @@ export default {
       position: relative;
       z-index: 4;
       width: 100%;
-      height: $main-nav-height;
+      height: $mainNav-height;
       .left-box,
       .right-box {
         width: 35%;

@@ -1,6 +1,3 @@
-import Main from '../pages/Main.vue'
-import Blog from '../pages/Blog.vue'
-
 /* global Vue VueRouter */
 Vue.use(VueRouter)
 
@@ -9,17 +6,17 @@ const routes = [
     path: '/',
     name: 'default',
     component: () => import('@/views/Default.vue'),
-    redirect: 'main',
+    redirect: 'index',
     children: [
       {
-        name: 'main',
-        path: '/main',
-        component: Main
+        name: 'index',
+        path: '/',
+        component: () => import('@/pages/Index.vue')
       },
       {
         name: 'blog',
         path: '/blog',
-        component: Blog
+        component: () => import('@/pages/Blog.vue')
       }
     ]
   },

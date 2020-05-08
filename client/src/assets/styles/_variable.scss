@@ -1,9 +1,23 @@
-// 颜色变量
+// 基础颜色变量
 $primary-color: #2a4b6b;
-$nav-color: rgb(102, 102, 102);
-$nav-bg-color: #fff;
-$default-color: rgb(94, 103, 107);
-$blue-color: #6891b9;
+$default-color: #8e8e8e;
+$blue-color: #2968a8;
+$white-color: #ffffff;
+$dark-grey-color: #5e5e5e;
+$grey-color: #bdbdbd;
 
-// 高度变量
-$main-nav-height: 100px;
+// 导航栏颜色变量
+$mainNav-color_logo: $primary-color;
+$mainNav-color_logo_reverse: $white-color;
+
+$mainNav-color_font: $white-color;
+$mainNav-color_font_hover: $primary-color;
+$mainNav-color_font_on: $primary-color;
+
+$mainNav-color_bg: $primary-color;
+$mainNav-color_bg_hover: $white-color;
+$mainNav-color_bg_on: $white-color;
+
+// 导航栏高度变量
+$mainNav-height: 40px;
+$mainNav-height_inner: 32px;

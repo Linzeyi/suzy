@@ -130,9 +130,7 @@ export default {
     },
     getMaskRadius() {
       return function(index) {
-        return this.pieMaskRadiusArr.length
-          ? this.pieMaskRadiusArr[index]
-          : this.radius
+        return this.pieMaskRadiusArr.length ? this.pieMaskRadiusArr[index] : this.radius
       }
     },
     getMaskDiameter() {
@@ -142,34 +140,19 @@ export default {
     },
     getSlicesTransformStyle() {
       return function(index) {
-        let transformStyle =
-          'rotate(' +
-          this.getSlicesRotate(index) +
-          'deg) skewY(' +
-          this.randomSkewArr[index] +
-          'deg)'
+        let transformStyle = 'rotate(' + this.getSlicesRotate(index) + 'deg) skewY(' + this.randomSkewArr[index] + 'deg)'
         return transformStyle
       }
     },
     getHoverSlicesTransformStyle() {
       return function(index) {
-        let transformStyle =
-          'rotate(' +
-          this.getSlicesRotate(index) +
-          'deg) skewY(' +
-          this.randomSkewArr[index] +
-          'deg)'
+        let transformStyle = 'rotate(' + this.getSlicesRotate(index) + 'deg) skewY(' + this.randomSkewArr[index] + 'deg)'
         return transformStyle
       }
     },
     getSlicesTitleTransformStyle() {
       return function(index) {
-        let transformStyle =
-          'skewY(' +
-          -this.randomSkewArr[index] +
-          'deg)rotate(' +
-          (360 - this.getSlicesRotate(index)) +
-          'deg)'
+        let transformStyle = 'skewY(' + -this.randomSkewArr[index] + 'deg)rotate(' + (360 - this.getSlicesRotate(index)) + 'deg)'
         return transformStyle
       }
     },
@@ -197,9 +180,9 @@ export default {
         this.pieMaskRadiusArr = []
         this.randomSkewArr = []
         for (let i = 0; i < this.slicesArr.length; i++) {
-          let offset = this.MathUtils.GetRandom(9, 16)
+          let offset = this.$math.GetRandom(9, 16)
           this.pieMaskRadiusArr.push(this.radius - offset)
-          // let skew = this.getSlicesSkew + this.MathUtils.GetRandom(4, 7)
+          // let skew = this.getSlicesSkew + this.$math.GetRandom(4, 7)
           let skew = this.getSlicesSkew
           this.randomSkewArr.push(skew)
         }

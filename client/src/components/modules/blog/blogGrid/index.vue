@@ -25,7 +25,7 @@
               <p class="desc">{{item.desc}}</p>
               <div class="bottom-font">
                 <div class="row">
-                  <span class="create-time">{{TimeUtils.DateSimpleFormat(item.createTime)}}</span>
+                  <span class="create-time">{{$time.DateSimpleFormat(item.createTime)}}</span>
                   <span class="icon-item">
                     <i class="iconfont icon-collect">&#xe643;</i>
                     122
@@ -88,9 +88,7 @@ export default {
   methods: {
     setGridWidth() {
       this.$nextTick(() => {
-        this.gridWidth = document.getElementById('blog_grid')
-          ? document.getElementById('blog_grid').offsetWidth
-          : 0
+        this.gridWidth = document.getElementById('blog_grid') ? document.getElementById('blog_grid').offsetWidth : 0
       })
     },
     setImgSize() {

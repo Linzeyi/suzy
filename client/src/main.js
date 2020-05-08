@@ -10,7 +10,7 @@ import './style.js'
 import './plugins/axios'
 
 //注册全局组件
-import components from './component.js'
+import components from './components.js'
 Object.keys(components).forEach(key => {
   var name = key.replace(/(\w)/, v => v.toUpperCase())
   Vue.component(name, components[key])

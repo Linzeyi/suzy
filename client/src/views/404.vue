@@ -15,13 +15,13 @@
     </div>
     <div class="bottom-content">
       <div class="row">
-        <button class="back-btn" @click="() => $router.go(-1)">
+        <button class="back-btn btn-line" @click="() => $router.go(-1)">
           <i class="iconfont icon-back">&#xe817;</i> 后退
         </button>
-        <button class="back-btn" @click="() => $router.go(0)">
+        <button class="back-btn btn-line" @click="() => $router.go(0)">
           <i class="iconfont icon-refresh">&#xe60a;</i> 刷新
         </button>
-        <button class="toHome-btn" @click="() => $router.push({name: 'main'})">
+        <button class="toHome-btn btn-line" @click="() => $router.push({name: 'index'})">
           <i class="iconfont icon-toHome">&#xe6bb;</i> 返回首页
         </button>
       </div>
@@ -81,18 +81,11 @@
         align-items: center;
         padding: 1vh 4vh;
         margin-right: 6vh;
-        border: 1px solid #838383;
         border-radius: 4px;
         font-size: 2.6vh;
-        color: #687079;
         .iconfont {
           font-size: 3vh;
           margin-right: 1vh;
-        }
-        &:hover {
-          border-color: $primary-color;
-          background-color: $primary-color;
-          color: #e6e6e6;
         }
         &:last-child {
           margin: 0;

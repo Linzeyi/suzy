@@ -11,11 +11,13 @@ export default {
   MetalFrame: () => import('./components/common/frame/MetalFrame'),
   //加载组件
   LoadingCover: () => import('./components/common/loading/LoadingCover'),
-  //导航栏组件
-  MainNav: () => import('./components/common/nav/MainNav'),
+  //下拉框组件
+  Dropdown: () => import('./components/common/nav/Dropdown'),
   /* --------------------[END]-------------------- */
 
   /* ------------------[模块组件]------------------ */
+  //导航栏模块
+  MainNav: () => import('./components/modules/nav/MainNav'),
   //首页模块
   MainBlogBoard: () => import('./components/modules/main/mainBlogBoard'),
   MainWorksBoard: () => import('./components/modules/main/mainWorksBoard'),

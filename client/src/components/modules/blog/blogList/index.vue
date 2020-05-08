@@ -10,7 +10,7 @@
             </div>
             <p class="create-time">
               <i class="iconfont icon-time">&#xf3ce;</i>
-              {{TimeUtils.DateFormat(item.createTime)}}
+              {{$time.DateFormat(item.createTime)}}
             </p>
             <div class="line-box bottom-line-box">
               <div class="dot"></div>
@@ -146,11 +146,7 @@ $line-color: #6f7c8a;
           .line-box.bottom-line-box {
             .line {
               background: transparent;
-              background-image: linear-gradient(
-                to bottom,
-                $line-color,
-                transparent
-              );
+              background-image: linear-gradient(to bottom, $line-color, transparent);
             }
           }
         }
@@ -173,11 +169,7 @@ $line-color: #6f7c8a;
               height: 5px;
             }
             .line {
-              background-image: linear-gradient(
-                to bottom,
-                #2d3946,
-                $line-color
-              );
+              background-image: linear-gradient(to bottom, #2d3946, $line-color);
             }
           }
         }

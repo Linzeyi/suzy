@@ -53,7 +53,7 @@ export default {
       isLoading: false,
       sortType: false,
       searchVal: '',
-      blogsData: this.FakeUtils.blogsData
+      blogsData: this.$fake.blogsData
     }
   },
   mounted() {},
@@ -81,10 +81,7 @@ export default {
     handlerSearch() {},
     toggleListType() {
       if (!this.isLoading) {
-        this.$emit(
-          'update:listType',
-          this.listType == 'list' ? 'grids' : 'list'
-        )
+        this.$emit('update:listType', this.listType == 'list' ? 'grids' : 'list')
         this.getBlogs()
       }
     },
