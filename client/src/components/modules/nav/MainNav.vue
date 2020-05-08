@@ -29,7 +29,12 @@
       <div class="setting-panel">
         <div class="row justify-end">
           <div class="setting-item" v-for="(item, index) in settingItems" :key="index">
-            <dropdown :propItem="item" :option="settingOption" @itemClick="handlePageChange"></dropdown>
+            <dropdown
+              trigger="click"
+              :propItem="item"
+              :option="settingOption"
+              @itemClick="handlePageChange"
+            ></dropdown>
           </div>
         </div>
       </div>
@@ -69,11 +74,11 @@ export default {
               children: [
                 {
                   title: '春',
-                  path: '/blog/1244'
+                  path: ''
                 },
                 {
                   title: '夏',
-                  path: '/blog/1234'
+                  path: ''
                 }
               ]
             }
@@ -145,6 +150,10 @@ export default {
               ]
             }
           ]
+        },
+        {
+          title: '',
+          icon: '&#xe72b;'
         }
       ],
       settingOption: {}
@@ -292,6 +301,12 @@ export default {
         position: relative;
         color: $mainNav-color_font;
         cursor: pointer;
+        ::v-deep > .dropdown > .dropdown-link-wrap .dropdown-link {
+          padding: 0 10px;
+        }
+        /deep/ .dropdown-link .iconfont {
+          font-size: 1.2rem;
+        }
       }
     }
   }

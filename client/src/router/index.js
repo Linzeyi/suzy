@@ -6,17 +6,17 @@ const routes = [
     path: '/',
     name: 'default',
     component: () => import('@/views/Default.vue'),
-    redirect: 'index',
+    redirect: 'home',
     children: [
       {
-        name: 'index',
+        name: 'home',
         path: '/',
-        component: () => import('@/pages/Index.vue')
+        component: () => import('@/pages/Home')
       },
       {
         name: 'blog',
         path: '/blog',
-        component: () => import('@/pages/Blog.vue')
+        component: () => import('@/pages/Blog')
       }
     ]
   },

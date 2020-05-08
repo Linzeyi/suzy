@@ -195,7 +195,7 @@ export default {
            * 根据弹出方位进行调整
            */
           if (this.placement === 'bottom') {
-            if (dropdownPos.bottom + listPos.height >= this.screenHeight) {
+            if (dropdownPos.bottom + listPos.height / 2 >= this.screenHeight) {
               // 下拉窗超过视窗底部，改为上浮
               this.setTopPopPos()
             } else {
@@ -232,26 +232,26 @@ export default {
     setBottomPopPos() {
       // 设置下悬浮弹窗定位
       this.$nextTick(() => {
-        let h = this.$refs['dropdown-el'].offsetHeight
-        this.$refs['dropdown-list-wrap-el'].style.top = h + 'px'
+        this.$refs['dropdown-list-wrap-el'].style.top = this.$refs['dropdown-el'].offsetHeight + 'px'
         this.$refs['dropdown-list-wrap-el'].style.left = '0px'
         this.$refs['dropdown-list-wrap-el'].style['padding'] = '5px 0 0 0'
+        this.setOverTopOrBottomPos()
       })
     },
     setTopPopPos() {
       // 设置上悬浮弹窗定位
       this.$nextTick(() => {
-        let listH = this.$refs['dropdown-list-wrap-el'].offsetHeight
-        this.$refs['dropdown-list-wrap-el'].style.top = -listH + 'px'
+        this.$refs['dropdown-list-wrap-el'].style.top = -this.$refs['dropdown-list-wrap-el'].offsetHeight + 'px'
         this.$refs['dropdown-list-wrap-el'].style.left = '0px'
         this.$refs['dropdown-list-wrap-el'].style['padding'] = '0 0 5px 0'
+        this.setOverTopOrBottomPos()
       })
     },
     setLeftPopPos() {
       // 设置左悬浮弹窗定位
       this.$nextTick(() => {
-        let listW = this.$refs['dropdown-list-wrap-el'].offsetWidth
-        this.$refs['dropdown-list-wrap-el'].style.left = -listW + 'px'
+        this.$refs['dropdown-list-wrap-el'].style.top = '0px'
+        this.$refs['dropdown-list-wrap-el'].style.left = -this.$refs['dropdown-list-wrap-el'].offsetWidth + 'px'
         this.$refs['dropdown-list-wrap-el'].style['padding'] = '0 5px 0 0'
         this.setOverTopOrBottomPos()
       })
@@ -259,8 +259,8 @@ export default {
     setRightPopPos() {
       // 设置右悬浮弹窗定位
       this.$nextTick(() => {
-        let w = this.$refs['dropdown-el'].offsetWidth
-        this.$refs['dropdown-list-wrap-el'].style.left = w + 'px'
+        this.$refs['dropdown-list-wrap-el'].style.top = '0px'
+        this.$refs['dropdown-list-wrap-el'].style.left = this.$refs['dropdown-el'].offsetWidth + 'px'
         this.$refs['dropdown-list-wrap-el'].style['padding'] = '0 0 0 5px'
         this.setOverTopOrBottomPos()
       })
@@ -270,12 +270,11 @@ export default {
       this.$nextTick(() => {
         let dropdownPos = this.$refs['dropdown-el'].getBoundingClientRect()
         let listPos = this.$refs['dropdown-list-wrap-el'].getBoundingClientRect()
+        if (listPos.height != 0) {
+          console.log('父容器top:', dropdownPos.top, '弹窗top:', listPos.top, '弹窗bottom:', listPos.bottom, '弹窗height:', listPos.height)
+        }
         if (dropdownPos.top + listPos.height + 5 >= this.screenHeight) {
           this.$refs['dropdown-list-wrap-el'].style.top = -(dropdownPos.top + listPos.height + 5 - this.screenHeight) + 'px'
-        } else if (dropdownPos.top + 5 <= 0) {
-          this.$refs['dropdown-list-wrap-el'].style.top = -dropdownPos.top + 5 + 'px'
-        } else {
-          this.$refs['dropdown-list-wrap-el'].style.top = '0px'
         }
       })
     },
@@ -298,6 +297,7 @@ export default {
     opacity: 0.7;
     > .iconfont {
       opacity: 0.7;
+      font-weight: 300;
     }
   }
   .dropdown-list-wrap {
@@ -310,6 +310,8 @@ export default {
       padding: 10px 0px;
       background-color: $primary-color;
       border-radius: 4px;
+      border: 1px solid #fff;
+      box-sizing: border-box;
       color: #fff;
       .dropdown {
         line-height: 30px;
@@ -333,6 +335,7 @@ export default {
       font-weight: 600;
       > .iconfont {
         opacity: 1;
+        font-weight: 300;
       }
     }
   }

@@ -21,7 +21,7 @@
         <button class="back-btn btn-line" @click="() => $router.go(0)">
           <i class="iconfont icon-refresh">&#xe60a;</i> 刷新
         </button>
-        <button class="toHome-btn btn-line" @click="() => $router.push({name: 'index'})">
+        <button class="toHome-btn btn-line" @click="() => $router.push({path: '/'})">
           <i class="iconfont icon-toHome">&#xe6bb;</i> 返回首页
         </button>
       </div>
